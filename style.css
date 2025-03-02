@@ -1,0 +1,102 @@
+.general {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); 
+    overflow: hidden;
+}
+.box_central {
+    display: flex;
+    flex-direction: column;
+    height: 65%;
+    width: 40%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+.title_login {
+    color: white;
+    font-family: "Outfit", serif;
+    font-size: 160%;
+    align-items: center;
+    text-align: center;
+}
+.line_white {
+    background-color: white;
+    height: 2%;
+    width: 100%;
+    opacity: 0,1;
+}
+.form_login {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.senha_login {
+    margin-top: 15%;
+}
+.t_email_login {
+    color: white;
+    font-size: 20px;
+    padding-right: 40px;
+    font-family: "Outfit", serif;
+}
+.t_senha_login {
+    color: white;
+    font-size: 20px;
+    padding-right: 40px;
+    font-family: "Outfit", serif;
+}
+.c_email_login {
+    padding: 5px;
+    border-radius: 10px;
+    outline: none;
+    cursor: text;
+    border: 1px solid #9f9e9e;
+    font-family: "Outfit", serif;
+}
+.c_senha_login {
+    padding: 5px;
+    border-radius: 10px;
+    outline: none;
+    cursor: text;
+    border: 1px solid #9f9e9e;
+    font-family: "Outfit", serif;
+}
+.botao_login {
+    text-align: center;
+    margin-top: 17%;
+}
+.b_entrar_login {
+    padding: 15px;
+    padding-right: 25px;
+    padding-left: 25px;
+    border-radius: 25px;
+    border: 1px solid #2c5364;
+    background-color: #203a43;
+    color: white;
+    font-family: "Outfit", serif;
+    font-size: 17px;
+    margin-right: 25px;
+    opacity: 0.8;
+    cursor: pointer;
+}
+.b_cadastrar_login {
+    padding: 15px;
+    padding-right: 25px;
+    padding-left: 25px;
+    border-radius: 25px;
+    border: 1px solid #2c5364;
+    background-color: #203a43;
+    color: white;
+    font-family: "Outfit", serif;
+    font-size: 17px;
+    margin-left: 25px;
+    opacity: 0.8;
+    cursor: pointer;
+}

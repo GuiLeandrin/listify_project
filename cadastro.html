@@ -1,38 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workspace</title>
+    <title>Workspace Project</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/576a6b1350.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="icon.png">
 </head>
-<body class="general">
-    <div class="box_central">
-        <header class="title_login">
-            <h1>Login - Workspace</h1>
+<body class="general_cadastro">
+    <div class="box_central_cadastro">
+        <header class="title_hall">
+            <h1>Cadastro - Workspace</h1>
         </header>
         <div class="line_white"></div>
-        <main class="form_login">
+        <main class="form_cadastro">
             <form action="" method="POST">
-                <div class="email_login">
-                    <label for="email" class="t_email_login">E-mail:</label>
-                    <input placeholder="Digite seu E-mail:" type="email" id="email" name="email" class="c_email_login" required>
+                <div class="cadastro_geral">
+                    <div class="cs_left">
+                        <div class="nome_cadastro">
+                            <label for="nome" class="t_nome_cadastro">Nome:</label>
+                            <input placeholder="Digite seu Nome:" type="text" id="nome" name="nome" class="c_nome_cadastro" required>
+                        </div>
+                        <div class="data_cadastro">
+                            <label for="data" class="t_data_cadastro">Data:</label>
+                            <input type="date" id="data" name="data" class="c_data_cadastro" required>
+                        </div>
+                        <div class="cpf_cadastro">
+                            <label for="cpf" class="t_cpf_cadastro">CPF:</label>
+                            <input class="c_cpf_cadastro" type="text" name="cpf" maxlength="14" placeholder="Digite seu CPF:" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required>
+                        </div>
+                    </div>
+                    <div class="cs_right">
+                        <div class="email_cadastro">
+                            <label for="email" class="t_email_cadastro">E-mail:</label>
+                            <input placeholder="Digite seu E-mail:" type="email" id="email" name="email" class="c_email_cadastro" required>
+                        </div>
+                        <div class="senha_cadastro">
+                            <label for="senha" class="t_senha_cadastro">Senha:</label>
+                            <input placeholder="Digite sua Senha:" type="password" id="senha" name="senha" class="c_senha_cadastro" required>
+                        </div>
+                        <div class="csenha_cadastro">
+                            <label for="senha" class="t_csenha_cadastro">Confirmar:</label>
+                            <input placeholder="Confirme sua Senha:" type="password" id="senha" name="senha" class="c_csenha_cadastro" required>
+                        </div>
+                    </div>
                 </div>
-                <div class="senha_login">
-                    <label for="senha" class="t_senha_login">Senha:</label>
-                    <input placeholder="Digite sua Senha:" type="password" id="senha" name="senha" class="c_senha_login" required>
-                </div>
-                <div class="botao_login">
-                    <button type="submit" class="b_entrar_login">Entrar</button>
-                    <a href="cadastro.html">
-                        <button type="button" class="b_cadastrar_login">Cadastrar</button>
-                    </a>
+                <div class="botao_cadastro">
+                    <button type="submit" class="b_entrar_cadastro">Entrar</button>
+                    <a href="index.html" class="b_login_cadastro">Login</a>
                 </div>
             </form>
         </main>
+    </div>
+    <div class="help_hall">
+        <a class="i_help_hall" href="https://wa.me/5514988257660?text=Olá,%20Tudo%20Bem%3F!%20Preciso%20da%20sua%20Ajuda!!" target="_blank" rel="noopener noreferrer"><i class="fa-regular fa-circle-question"></i><br>Precisa de Ajuda?</a>
     </div>
 </body>
 </html>

@@ -225,7 +225,7 @@
 .botao_login {
     text-align: center;
     margin-top: 3.5vw;
-    margin-bottom: 1vw;
+    margin-bottom: 1.5vw;
 }
 .botao_cadastro {
     text-align: center;
@@ -308,8 +308,237 @@
     font-family: "Outfit", serif;
 }
 
-@media (max-width: 460px) {
+/* SISTEMA RESPONSIVO */
+
+/* Geral */
+@media (max-width: 1000px) {
+    .title_hall {
+        font-size: 5vw;
+    }
+    .line_white {
+        height: 0.9vw;
+    }
+    .help_hall {
+        margin-right: 3.5vw;
+        margin-bottom: 3.5vw;
+    }
+    .help_hall i {
+        font-size: 3.5vw;
+    }
+    .i_help_hall {
+        font-size: 2.7vw;
+    }
+}
+@media (max-width: 700px) {
+    .title_hall {
+        font-size: 5.5vw;
+    }
+    .line_white {
+        height: 1.5vw;
+    }
+    .help_hall {
+        margin-right: 5vw;
+        margin-bottom: 5vw;
+    }
+    .help_hall i {
+        font-size: 5.5vw;
+    }
+    .i_help_hall {
+        font-size: 4.5vw;
+    }
+}
+/* Login */
+@media (max-width: 1000px) {
+    .box_central_login {
+        height: 55vw;
+        width: 55vw;
+        border-radius: 4vw;
+    }
+    .t_email_login {
+        font-size: 2.8vw;
+    }
+    .t_senha_login {
+        font-size: 2.8vw;
+    }
+    .c_email_login {
+        padding: 0.5vw;
+        width: 18vw;
+        height: 2vw;
+        font-size: 1.8vw;
+    }
+    .c_senha_login {
+        padding: 0.5vw;
+        width: 18vw;
+        height: 2vw;
+        font-size: 1.8vw;
+    }
+    .botao_login {
+        margin-top: 6.5vw;
+        margin-bottom: 2.5vw;
+    }
+    .b_entrar_login {
+        padding: 1.5vw;
+        padding-right: 2.5vw;
+        padding-left: 2.5vw;
+        border-radius: 2.6vw;
+        font-size: 2.3vw;
+    }
+    .b_cadastrar_login {
+        padding: 1.5vw;
+        padding-right: 2.5vw;
+        padding-left: 2.5vw;
+        border-radius: 2.6vw;
+        font-size: 2.3vw;
+    }
+}
+@media (max-width: 700px) {
+    .box_central_login {
+        height: 70vw;
+        width: 65vw;
+        border-radius: 4.5vw;
+    }
+    .t_email_login {
+        font-size: 5vw;
+    }
+    .t_senha_login {
+        font-size: 5vw;
+    }
+    .c_email_login {
+        padding: 2vw;
+        width: 35vw;
+        height: 2.5vw;
+        font-size: 3vw;
+        border-radius: 2vw;
+    }
+    .c_senha_login {
+        padding: 2vw;
+        width: 35vw;
+        height: 2.5vw;
+        font-size: 3vw;
+        border-radius: 2vw;
+    }
+    .botao_login {
+        margin-top: 9vw;
+        margin-bottom: 2.5vw;
+    }
+    .b_entrar_login {
+        padding: 2vw;
+        padding-right: 5vw;
+        padding-left: 5vw;
+        border-radius: 3.5vw;
+        font-size: 3vw;
+    }
+    .b_cadastrar_login {
+        padding: 2vw;
+        padding-right: 5vw;
+        padding-left: 5vw;
+        border-radius: 3.5vw;
+        font-size: 3vw;
+    }
+}
+/* Cadastro */
+@media (max-width: 1000px) {
     .box_central_cadastro {
-        height: 45vw;
+        height: 65vw;
+        width: 75vw;
+    }
+    .cadastro_geral {
+        margin-top: 1vw;
+    }
+    .senha_cadastro {
+        margin-top: 4vw;
+    }
+    .csenha_cadastro {
+        margin-top: 4vw;
+    }
+    .data_cadastro {
+        margin-top: 4vw;
+    }
+    .cpf_cadastro {
+        margin-top: 4vw;
+    }
+    .cs_left {
+        margin-left: 1.5vw;
+    }
+    .cs_right {
+        margin-right: 1.5vw;
+    }
+    .t_email_cadastro {
+        font-size: 3vw;
+        padding-right: 0.5vw;
+    }
+    .t_senha_cadastro {
+        font-size: 3vw;
+        padding-right: 0.6vw;
+    }
+    .t_csenha_cadastro {
+        font-size: 3vw;
+        padding-right: 0.2vw;
+    }
+    .t_nome_cadastro {
+        font-size: 3vw;
+        padding-right: 0.2vw;
+    }
+    .t_data_cadastro {
+        font-size: 3vw;
+        padding-right: 0.6vw;
+    }
+    .t_cpf_cadastro {
+        font-size: 3vw;
+        padding-right: 0.6vw;
+    }
+    .c_email_cadastro {
+        font-size: 2vw;
+        padding: 0.6vw;
+        width: 25vw;
+        border-radius: 0.8vw;
+    }
+    .c_senha_cadastro {
+        font-size: 2vw;
+        padding: 0.6vw;
+        width: 25vw;
+        border-radius: 0.8vw;
+    }
+    .c_csenha_cadastro {
+        font-size: 2vw;
+        padding: 0.6vw;
+        width: 20vw;
+        border-radius: 0.8vw;
+    }
+    .c_nome_cadastro {
+        font-size: 2vw;
+        padding: 0.6vw;
+        width: 20vw;
+        border-radius: 0.8vw;
+    }
+    .c_data_cadastro {
+        font-size: 2vw;
+        padding: 0.6vw;
+        width: 20vw;
+        border-radius: 0.8vw;
+    }
+    .c_cpf_cadastro {
+        font-size: 2vw;
+        padding: 0.6vw;
+        width: 21vw;
+        border-radius: 0.8vw;
+    }
+    .botao_cadastro {
+        margin-top: 6vw;
+        margin-bottom: 1vw;
+    }
+    .b_entrar_cadastro {
+        padding: 2vw;
+        padding-right: 4vw;
+        padding-left: 4vw;
+        font-size: 2.5vw;
+        border-radius: 3vw;
+    }
+    .b_login_cadastro {
+        padding: 2vw;
+        padding-right: 4vw;
+        padding-left: 4vw;
+        font-size: 2.5vw;
+        border-radius: 3vw;
     }
 }

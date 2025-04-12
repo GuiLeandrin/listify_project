@@ -1,60 +1,46 @@
 <?php
     session_start();
-    $erroSenha = @$_SESSION['erroSenha'];
-    $erroForms = @$_SESSION['erroForms'];
-    $erroConta = @$_SESSION['erroConta'];
-    unset($_SESSION['erroSenha'], $_SESSION['erroForms'], $_SESSION['erroConta']);
+    $erro = @$_SESSION['erro'];
+    unset($_SESSION['erro']);
 
     if(isset($_POST['submit'])) {
         $conexao = new mysqli("localhost", "root", "", "website");
         $email = @$_POST['email'];
         $senha = @$_POST['senha'];
-        $msg = false;
-
-        $sql = "SELECT * FROM usuarios WHERE email = '$email' AND senha = '$senha';";
-        $verifica = $conexao->query($sql);
 
         if($email && $senha) {
-            if ($verifica->num_rows > 0) {
-                $usuario = $verifica->fetch_assoc();
-                $_SESSION['id'] = $usuario['id'];
-                $_SESSION['email'] = $usuario['email'];
-                
-                header("Location: xxx.xxx");
-                exit;
-            } else {
-                $emailBanco = "SELECT * FROM usuarios WHERE email = '$email';";
-                $senhaBanco = "SELECT * FROM usuarios WHERE senha = '$senha';";
-                $verificaEmail = $conexao->query($emailBanco);
-                $verificaSenha = $conexao->query($senhaBanco);
-                if ($verificaEmail->num_rows == 0) {
-                    $msg = true;
-                    if($msg) {
-                        $erroConta = "
-                            <div class='mt-4 rounded text-center w-100 p-2 mt-1' style='background-color: #f8d7da; color: #721c24;'>
-                                <p class='m-0 d-flex justify-content-center align-items-center h-100'>Este E-mail não possui uma conta!!</p>
-                            </div>
-                        ";
-                    }
-                    $msg = false;
-                } elseif ($verificaSenha->num_rows == 0) {
-                    $erroSenha = "<p class='text-center p-2 mt-1 w-75 rounded' style='background-color: #f8d7da; color: #721c24;'>Senha incorreta, digite novamente!</p>";
+            $sql = "SELECT * FROM usuarios WHERE email = '$email';";
+            $verifica = $conexao->query($sql);
+            $usuario = $verifica->fetch_assoc();
+            
+            if ($usuario) {
+                if($usuario['senha'] == $senha) {
+                    $_SESSION['id'] = $usuario['id'];
+                    $_SESSION['nome'] = $usuario['nome'];
+                    header("Location: home.php");
+                    exit;
+                } else {
+                    $erro = "
+                        <div class='mt-2 rounded text-center w-100 p-2' style='background-color: #f8d7da; color: #721c24;'>
+                            <p class='m-0 d-flex justify-content-center align-items-center h-100'>Senha Incorreta</p>
+                        </div>
+                    ";
                 }
-            }
-        } else {    
-            $msg = true;
-            if($msg) {
-                $erroForms = "
-                    <div class='mt-4 rounded text-center w-100 p-2 mt-1' style='background-color: #f8d7da; color: #721c24;'>
-                        <p class='m-0 d-flex justify-content-center align-items-center h-100'>Formulário não preenchido corretamente!!</p>
+            } else {
+                $erro = "
+                    <div class='mt-2 rounded text-center w-100 p-2' style='background-color: #f8d7da; color: #721c24;'>
+                        <p class='m-0 d-flex justify-content-center align-items-center h-100'>Este e-mail não possui uma conta!!</p>
                     </div>
                 ";
             }
-            $msg = false;
+        } else {    
+            $erro = "
+                <div class='mt-2 rounded text-center w-100 p-2' style='background-color: #f8d7da; color: #721c24;'>
+                    <p class='m-0 d-flex justify-content-center align-items-center h-100'>Formulário não preenchido corretamente</p>
+                </div>
+            ";
         }
-        $_SESSION['erroSenha'] = $erroSenha;
-        $_SESSION['erroForms'] = $erroForms;
-        $_SESSION['erroConta'] = $erroConta;
+        $_SESSION['erro'] = $erro;
         header("Location: " . $_SERVER['PHP_SELF']);
         exit;
     }
@@ -74,7 +60,12 @@
                 <h1>Log in</h1>
         </div>
         <form action=""  method="POST" class="w-100 h-75 d-flex flex-column align-items-center">
-            <div class="input-group rounded-1 border border-2 border-dark border-opacity-25 w-75 mt-4">
+            <div class="w-75 d-flex gap-1">
+                <?php if ($erro): ?>
+                        <?php echo $erro; ?>
+                <?php endif; ?>
+            </div>
+            <div class="input-group rounded-1 border border-2 border-dark border-opacity-25 w-75 mt-3">
                 <label for="email" class="input-group-text bg-transparent border-0 text-decoration-none"  style="cursor: text;"><i class="fa-solid fa-envelope"></i></label>
                 <input type="email" class="form-control bg-transparent border-0 shadow-none" placeholder="Digite seu e-mail:" name="email" id="email">
             </div>
@@ -82,20 +73,9 @@
                 <label for="senha" class="input-group-text bg-transparent border-0 text-decoration-none"  style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
                 <input type="password" class="form-control bg-transparent border-0 shadow-none" placeholder="Digite sua senha:" name="senha" id="senha">
             </div>
-            <?php if ($erroSenha): ?>
-                    <?php echo $erroSenha; ?>
-            <?php endif; ?>
             <div class="w-75 mt-4 d-flex gap-1">
                 <input type="submit" name="submit" class="btn btn-primary w-100" value="Entrar">
                 <a href="cadastro.php" class="btn btn-primary w-100">Cadastro</a>
-            </div>
-            <div class="w-75 d-flex gap-1">
-                <?php if ($erroForms): ?>
-                        <?php echo $erroForms; ?>
-                <?php endif; ?>
-                <?php if ($erroConta): ?>
-                        <?php echo $erroConta; ?>
-                <?php endif; ?>
             </div>
             <div class="mt-5">
                 <h6><a href="">Esqueceu sua Senha?</a></h6>

@@ -51,11 +51,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="favicon.png">
     <script src="https://kit.fontawesome.com/576a6b1350.js" crossorigin="anonymous"></script>
-    <title>Exercício Login - Bootstrap</title>
+    <title>Login</title>
 </head>
 <body class="vh-100 d-flex align-items-center justify-content-center p-2 row overflow-hidden" style="background: linear-gradient(45deg, #f0f0f0, #d6d6d6);">
-    <div class="bg-white shadow-lg rounded-5 d-flex flex-column align-items-center col-md-4 col-sm-8 col-10" style="min-height: 450px; padding: 2rem 0;">
+    <div class="bg-white shadow-lg rounded-5 d-flex flex-column align-items-center col-md-4 col-sm-8 col-10" style="min-height: 400px; padding: 2rem 0;">
         <div class="w-75 mb-4 pb-4 d-flex align-items-center justify-content-center border-bottom border-5 border-black">
                 <h1>Log in</h1>
         </div>

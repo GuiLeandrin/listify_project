@@ -79,7 +79,7 @@
                 <a href="cadastro.php" class="btn btn-primary w-100">Cadastro</a>
             </div>
             <div class="mt-5">
-                <h6><a href="">Esqueceu sua Senha?</a></h6>
+                <h6><a href="verifica_cpf.php">Esqueceu sua Senha?</a></h6>
             </div>
         </form>
     </div>

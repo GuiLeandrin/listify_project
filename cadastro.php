@@ -14,51 +14,82 @@
 
         if($nome && $telefone && $cpf && $email && $senha && $confirma) {
             if(strlen($telefone) == 15 && strlen($cpf) == 14) {
-                if($senha == $confirma) {
-                    $sql = "SELECT * FROM usuarios WHERE email = '$email' OR cpf = '$cpf';";
-                    $verifica = $conexao->query($sql);
-                    $usuario = $verifica->fetch_assoc();
+                
+                //INÍCIO FUNÇÃO VERIFICAÇÃO CPF REAL
+                function validaCPF($cpf) {
+                    // Extrai somente os números
+                    $calculoCpf = preg_replace( '/[^0-9]/is', '', $cpf );
+                    // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
+                    if (preg_match('/(\d)\1{10}/', $cpf)) {
+                        return false;
+                    }
+                    // Faz o calculo para validar o CPF
+                    for ($i = 9; $i < 11; $i++) {
+                        for ($resultadoCpf = 0, $n = 0; $n < $i; $n++) {
+                            $resultadoCpf += $calculoCpf[$n] * (($i + 1) - $n);
+                        }
+                        $resultadoCpf = ((10 * $resultadoCpf) % 11) % 10;
+                        if ($calculoCpf[$n] != $resultadoCpf) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                //FIM FUNÇÃO VERIFICAÇÃO CPF REAL
 
-                    if($usuario['cpf'] != $cpf && $usuario['email'] != $email) {
-                        $inserir = "INSERT INTO usuarios (nome, email, senha, cpf, telefone) VALUES ('$nome', '$email', '$senha', '$cpf', '$telefone');";
-                        $inserirCadastro = $conexao->query($inserir);
-
-                        if($inserirCadastro == true) {
-                            $log = "
-                                <div class='rounded text-center w-100 p-2' style='background-color: #d4edda; color: #155724;'>
-                                    <p class='m-0 d-flex justify-content-center align-items-center h-100'>Usuário Cadastrado com sucesso!!</p>
-                                </div>
-                            ";
-                        } else {    
+                if(validaCPF($cpf)) {
+                    if($senha == $confirma) {
+                        $sql = "SELECT * FROM usuarios WHERE email = '$email' OR cpf = '$cpf';";
+                        $verifica = $conexao->query($sql);
+                        $usuario = $verifica->fetch_assoc();
+    
+                        if($usuario['cpf'] != $cpf && $usuario['email'] != $email) {
+                            $inserir = "INSERT INTO usuarios (nome, email, senha, cpf, telefone) VALUES ('$nome', '$email', '$senha', '$cpf', '$telefone');";
+                            $inserirCadastro = $conexao->query($inserir);
+    
+                            if($inserirCadastro == true) {
+                                $log = "
+                                    <div class='rounded text-center w-100 p-2' style='background-color: #d4edda; color: #155724;'>
+                                        <p class='m-0 d-flex justify-content-center align-items-center h-100'>Usuário Cadastrado com sucesso!!</p>
+                                    </div>
+                                ";
+                            } else {    
+                                $log = "
+                                    <div class='rounded text-center w-100 p-2' style='background-color: #f8d7da; color: #721c24;'>
+                                        <p class='m-0 d-flex justify-content-center align-items-center h-100'>Erro no Cadastro</p>
+                                    </div>
+                                ";
+                            }
+                        } elseif ($usuario['cpf'] != $cpf) {
                             $log = "
                                 <div class='rounded text-center w-100 p-2' style='background-color: #f8d7da; color: #721c24;'>
-                                    <p class='m-0 d-flex justify-content-center align-items-center h-100'>Erro no Cadastro</p>
+                                    <p class='m-0 d-flex justify-content-center align-items-center h-100'>E-mail já cadastrado</p>
+                                </div>
+                            ";
+                        } elseif ($usuario['email'] != $email) {
+                            $log = "
+                                <div class='rounded text-center w-100 p-2' style='background-color: #f8d7da; color: #721c24;'>
+                                    <p class='m-0 d-flex justify-content-center align-items-center h-100'>CPF já cadastrado</p>
+                                </div>
+                            ";
+                        } else {
+                            $log = "
+                                <div class='rounded text-center w-100 p-2' style='background-color: #f8d7da; color: #721c24;'>
+                                    <p class='m-0 d-flex justify-content-center align-items-center h-100'>CPF e E-mail já cadastrados</p>
                                 </div>
                             ";
                         }
-                    } elseif ($usuario['cpf'] != $cpf) {
-                        $log = "
-                            <div class='rounded text-center w-100 p-2' style='background-color: #f8d7da; color: #721c24;'>
-                                <p class='m-0 d-flex justify-content-center align-items-center h-100'>E-mail já cadastrado</p>
-                            </div>
-                        ";
-                    } elseif ($usuario['email'] != $email) {
-                        $log = "
-                            <div class='rounded text-center w-100 p-2' style='background-color: #f8d7da; color: #721c24;'>
-                                <p class='m-0 d-flex justify-content-center align-items-center h-100'>CPF já cadastrado</p>
-                            </div>
-                        ";
                     } else {
                         $log = "
                             <div class='rounded text-center w-100 p-2' style='background-color: #f8d7da; color: #721c24;'>
-                                <p class='m-0 d-flex justify-content-center align-items-center h-100'>CPF e E-mail já cadastrados</p>
+                                <p class='m-0 d-flex justify-content-center align-items-center h-100'>Senhas informadas divergentes</p>
                             </div>
                         ";
                     }
                 } else {
                     $log = "
                         <div class='rounded text-center w-100 p-2' style='background-color: #f8d7da; color: #721c24;'>
-                            <p class='m-0 d-flex justify-content-center align-items-center h-100'>Senhas informadas divergentes</p>
+                            <p class='m-0 d-flex justify-content-center align-items-center h-100'>CPF informado não é real</p>
                         </div>
                     ";
                 }

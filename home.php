@@ -7,6 +7,12 @@
         header("Location: index.php");
         exit;
     }
+
+    if(isset($_POST['submit'])) {
+        unset($_SESSION['id'], $_SESSION['nome']);
+        header("Location: index.php");
+        exit;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -23,6 +29,8 @@
             <?php echo "Bem Vindo(a), $nome. Que bom ter você aqui conosco!"; ?>
         <?php endif; ?>
     </h1>
-    <a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" class="mt-5 btn btn-secondary w-25">Voltar</a>
+    <form action="" method="POST" class="w-100 d-flex align-items-center justify-content-center">
+            <input type="submit" name="submit" class="mt-5 btn btn-secondary w-25" value="Voltar">
+    </form>
 </body>
 </html>

@@ -14,7 +14,7 @@
         $email = @$_POST['email'];
 
         if($email) {
-            $sql = "SELECT * FROM usuarios WHERE email = '$email';";
+            $sql = "SELECT * FROM usuarios WHERE email = '$email' AND cpf = '$cpf';";
             $verifica = $conexao->query($sql);
             $usuario = $verifica->fetch_assoc();
 
@@ -25,7 +25,7 @@
             } else {
                 $erro = "
                     <div class='rounded text-center w-75 p-2 mb-2' style='background-color: #f8d7da; color: #721c24;'>
-                        <p class='m-0 d-flex justify-content-center align-items-center h-100'>E-mail não cadastrado</p>
+                        <p class='m-0 d-flex justify-content-center align-items-center h-100'>E-mail incorreto</p>
                     </div>
                 ";
             }
@@ -65,7 +65,7 @@
                 <?php echo $erro; ?>
             <?php endif; ?>
             <div class="w-75">
-                <label for="cpf" class="form-label">Digite seu E-mail para redefinir sua senha:</label>
+                <label for="email" class="form-label" style="cursor: text;">Digite seu E-mail para redefinir sua senha:</label>
                 <input type="email" class="form-control bg-transparent border-2" placeholder="exemplo@dominio.com" name="email" id="email">
             </div>
             <div class="w-75 mt-3 gap-1 d-flex">

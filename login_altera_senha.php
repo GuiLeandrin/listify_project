@@ -6,7 +6,7 @@
     unset($_SESSION['log']);
 
     if (!$cpf && !$email) {
-        header("Location: verifica_cpf.php");
+        header("Location: login_verifica_cpf.php");
         exit;
     }
 

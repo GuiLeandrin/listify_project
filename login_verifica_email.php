@@ -5,7 +5,7 @@
     unset($_SESSION['erro']);
 
     if (!$cpf) {
-        header("Location: verifica_cpf.php");
+        header("Location: login_verifica_cpf.php");
         exit;
     }
 
@@ -20,7 +20,7 @@
 
             if($usuario) {
                 $_SESSION['email'] = $usuario['email'];
-                header("Location: redefine_senha.php");
+                header("Location: login_altera_senha.php");
                 exit;
             } else {
                 $erro = "

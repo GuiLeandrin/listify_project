@@ -15,7 +15,7 @@
 
                 if($usuario) {
                     $_SESSION['cpf'] = $usuario['cpf'];
-                    header("Location: verifica_email.php");
+                    header("Location: login_verifica_email.php");
                     exit;
                 } else {
                     $erro = "

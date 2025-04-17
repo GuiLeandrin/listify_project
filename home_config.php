@@ -27,11 +27,11 @@
 <body class="vh-100">
     <div class="bg-primary d-flex justify-content-between p-4" style="height: 15vh;">
         <div class="h-100 w-auto d-flex align-items-center">
-            <a href="home.php" class="text-decoration-none"><h2 class="text-white m-0">Listify</h2></a>
+            <a href="home.php" class="text-decoration-none"><h2 class="text-white m-0">Listify - Configurações</h2></a>
         </div>
         <form action="" class="h-100 d-flex align-items-center justify-content-evenly" method="POST">
             <div>
-                <a href="home_config.php" class="fs-5"><i class="fa-solid fa-gear text-white"></i></a>
+                <a href="home.php" class="fs-5"><i class="fa-solid fa-share fa-flip-horizontal text-white"></i></a>
             </div>
             <div class="ms-4">
                 <button type="submit" name="logout" class="btn btn-lg p-0 border-0">

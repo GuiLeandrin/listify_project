@@ -147,48 +147,48 @@
             <div class="row g-2">
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
-                        <label for="nome_desktop" class="input-group-text bg-transparent border-0 text-decoration-none d-none d-sm-block"  style="cursor: text;"><i class="fa-solid fa-user"></i></label>
-                        <label for="nome_mobile" class="input-group-text bg-transparent border-0 text-decoration-none d-block d-sm-none"  style="cursor: text;"><i class="fa-solid fa-user"></i></label>
+                        <label for="nome_desktop" class="input-group-text bg-transparent border-0 text-decoration-none d-none d-sm-block" style="cursor: text;"><i class="fa-solid fa-user"></i></label>
+                        <label for="nome_mobile" class="input-group-text bg-transparent border-0 text-decoration-none d-block d-sm-none" style="cursor: text;"><i class="fa-solid fa-user"></i></label>
                         <input type="text" class="form-control bg-transparent border-0 shadow-none d-none d-sm-block" placeholder="Digite seu Nome:" name="nome_desktop" id="nome_desktop">
                         <input type="text" class="form-control bg-transparent border-0 shadow-none d-block d-sm-none" placeholder="Nome:" name="nome_mobile" id="nome_mobile">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
-                        <label for="telefone_desktop" class="input-group-text bg-transparent border-0 text-decoration-none d-none d-sm-block"  style="cursor: text;"><i class="fa-solid fa-phone"></i></i></label>
-                        <label for="telefone_mobile" class="input-group-text bg-transparent border-0 text-decoration-none d-block d-sm-none"  style="cursor: text;"><i class="fa-solid fa-phone"></i></i></label>
+                        <label for="telefone_desktop" class="input-group-text bg-transparent border-0 text-decoration-none d-none d-sm-block" style="cursor: text;"><i class="fa-solid fa-phone"></i></label>
+                        <label for="telefone_mobile" class="input-group-text bg-transparent border-0 text-decoration-none d-block d-sm-none" style="cursor: text;"><i class="fa-solid fa-phone"></i></label>
                         <input type="text" class="form-control bg-transparent border-0 shadow-none d-none d-sm-block" name="telefone_desktop" id="telefone_desktop" maxlength="15" placeholder="Digite seu Telefone:" oninput="this.value = this.value.replace(/\D/g, '').replace(/^(\d{2})(\d)/g, '($1) $2').replace(/(\d{5})(\d{4})$/, '$1-$2')">
                         <input type="text" class="form-control bg-transparent border-0 shadow-none d-block d-sm-none" name="telefone_mobile" id="telefone_mobile" maxlength="15" placeholder="Telefone:" oninput="this.value = this.value.replace(/\D/g, '').replace(/^(\d{2})(\d)/g, '($1) $2').replace(/(\d{5})(\d{4})$/, '$1-$2')">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
-                        <label for="cpf_desktop" class="input-group-text bg-transparent border-0 text-decoration-none d-none d-sm-block"  style="cursor: text;"><i class="fa-solid fa-address-card"></i></label>
-                        <label for="cpf_mobile" class="input-group-text bg-transparent border-0 text-decoration-none d-block d-sm-none"  style="cursor: text;"><i class="fa-solid fa-address-card"></i></label>
+                        <label for="cpf_desktop" class="input-group-text bg-transparent border-0 text-decoration-none d-none d-sm-block" style="cursor: text;"><i class="fa-solid fa-address-card"></i></label>
+                        <label for="cpf_mobile" class="input-group-text bg-transparent border-0 text-decoration-none d-block d-sm-none" style="cursor: text;"><i class="fa-solid fa-address-card"></i></label>
                         <input type="text" class="form-control bg-transparent border-0 shadow-none d-none d-sm-block" name="cpf_desktop" id="cpf_desktop" maxlength="14" placeholder="Digite seu CPF:" oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2')">
                         <input type="text" class="form-control bg-transparent border-0 shadow-none d-block d-sm-none" name="cpf_mobile" id="cpf_mobile" maxlength="14" placeholder="CPF:" oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2')">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-12">
                 <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
-                        <label for="email_desktop" class="input-group-text bg-transparent border-0 text-decoration-none d-none d-sm-block"  style="cursor: text;"><i class="fa-solid fa-envelope"></i></label>
-                        <label for="email_mobile" class="input-group-text bg-transparent border-0 text-decoration-none d-block d-sm-none"  style="cursor: text;"><i class="fa-solid fa-envelope"></i></label>
+                        <label for="email_desktop" class="input-group-text bg-transparent border-0 text-decoration-none d-none d-sm-block" style="cursor: text;"><i class="fa-solid fa-envelope"></i></label>
+                        <label for="email_mobile" class="input-group-text bg-transparent border-0 text-decoration-none d-block d-sm-none" style="cursor: text;"><i class="fa-solid fa-envelope"></i></label>
                         <input type="email" class="form-control bg-transparent border-0 shadow-none d-none d-sm-block" placeholder="Digite seu E-mail:" name="email_desktop" id="email_desktop">
                         <input type="email" class="form-control bg-transparent border-0 shadow-none d-block d-sm-none" placeholder="E-mail:" name="email_mobile" id="email_mobile">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
-                        <label for="senha_desktop" class="input-group-text bg-transparent border-0 text-decoration-none d-none d-sm-block"  style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
-                        <label for="senha_mobile" class="input-group-text bg-transparent border-0 text-decoration-none d-block d-sm-none"  style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
+                        <label for="senha_desktop" class="input-group-text bg-transparent border-0 text-decoration-none d-none d-sm-block" style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
+                        <label for="senha_mobile" class="input-group-text bg-transparent border-0 text-decoration-none d-block d-sm-none" style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
                         <input type="password" class="form-control bg-transparent border-0 shadow-none d-none d-sm-block" placeholder="Digite sua Senha:" name="senha_desktop" id="senha_desktop">
                         <input type="password" class="form-control bg-transparent border-0 shadow-none d-block d-sm-none" placeholder="Senha:" name="senha_mobile" id="senha_mobile">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-12 mb-3">
                     <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
-                        <label for="confirma_desktop" class="input-group-text bg-transparent border-0 text-decoration-none d-none d-sm-block"  style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
-                        <label for="confirma_mobile" class="input-group-text bg-transparent border-0 text-decoration-none d-block d-sm-none"  style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
+                        <label for="confirma_desktop" class="input-group-text bg-transparent border-0 text-decoration-none d-none d-sm-block" style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
+                        <label for="confirma_mobile" class="input-group-text bg-transparent border-0 text-decoration-none d-block d-sm-none" style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
                         <input type="password" class="form-control bg-transparent border-0 shadow-none d-none d-sm-block" placeholder="Confirme sua Senha:" name="confirma_desktop" id="confirma_desktop">
                         <input type="password" class="form-control bg-transparent border-0 shadow-none d-block d-sm-none" placeholder="Confirmar:" name="confirma_mobile" id="confirma_mobile">
                     </div>

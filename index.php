@@ -16,7 +16,6 @@
             if ($usuario) {
                 if($usuario['senha'] == $senha) {
                     $_SESSION['id'] = $usuario['id'];
-                    $_SESSION['nome'] = $usuario['nome'];
                     header("Location: home.php");
                     exit;
                 } else {

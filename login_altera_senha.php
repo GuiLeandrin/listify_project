@@ -17,15 +17,15 @@
 
         if($senha && $confirma) {
             if($senha == $confirma) {
-                $sql = "SELECT * FROM usuarios WHERE email = '$email' AND cpf = '$cpf';";
+                $sql = "SELECT * FROM usuarios WHERE email = '$email';";
                 $verifica = $conexao->query($sql);
                 $usuario = $verifica->fetch_assoc();
 
                 if($senha != $usuario['senha']) {
-                    $sql = "UPDATE usuarios SET senha = '$senha' WHERE email = '$email' AND cpf = '$cpf';";
-                    $verifica = $conexao->query($sql);
+                    $sql = "UPDATE usuarios SET senha = '$senha' WHERE email = '$email';";
+                    $altera = $conexao->query($sql);
                     
-                    if($verifica) {
+                    if($altera) {
                         $log = "<div class='rounded text-center w-75 p-2' style='background-color: #d4edda; color: #155724;'>
                                 <p class='m-0 d-flex justify-content-center align-items-center h-100'>Senha alterada com sucesso!!</p>
                             </div>

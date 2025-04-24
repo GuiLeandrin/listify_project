@@ -1,6 +1,9 @@
 <?php
     session_start();
     $id = @$_SESSION['id'];
+    $confirmDelete = @$_SESSION['confirmDelete'];
+    $erro = @$_SESSION['erro'];
+    unset($_SESSION['erro'], $_SESSION['confirmDelete']);
 
     if($id) {
         $conexao = new mysqli("localhost", "root", "", "website");
@@ -14,6 +17,55 @@
         $telefone = @$usuario['telefone'];
     } else {
         header("Location: index.php");
+        exit;
+    }
+
+    if(isset($_POST['submit'])) {
+        $inicioFrase = explode('@', $email)[0];
+        $frase = "($inicioFrase/confirmExclusion)";
+        $confirmDelete = "                
+            <div class='h-auto w-75 mt-4 ms-2 ms-md-4 ms-xxl-5'> 
+                <div class='h-auto w-100'>
+                    <p style='text-align: justify;'>To proceed with the deletion of your account, please enter the standard confirmation phrase shown below into the designated text field:  $frase</p>
+                </div>
+                <div class='h-auto w-100 d-flex flex-column align-items-center justify-content-center gap-3'>
+                    <?php if ($erro): ?>
+                        <?php echo $erro; ?>
+                    <?php endif; ?>
+                    <input type='text' name='fraseConfirm' class='form-control bg-white border-2' placeholder='xxxxxxxx/confirmExclusion'>
+                    <input type='submit' class='w-100 btn btn-danger' value='Confirm Delete'>
+                </div>
+            </div>
+        ";
+
+        if(isset($_POST['submit']) && $_POST['submit'] === 'Confirm Delete') {
+            $fraseInserida = @$_POST['fraseConfirm'];
+            if($fraseInserida == $frase) {
+                $delete = "DELETE FROM usuarios WHERE id = '$id';";
+                $exclusao = $conexao->query($delete);
+
+                if($exclusao) {
+                    unset($_SESSION['id']);
+                    header("Location: index.php");
+                    exit;
+                } else {
+                    $erro = "
+                        <div class='rounded text-center w-100 p-1' style='background-color: #f8d7da; color: #721c24;'>
+                            <p class='m-0 d-flex justify-content-center align-items-center h-100'>Erro no Delete!</p>
+                        </div>
+                    ";
+                }
+            } else {
+                $erro = "
+                    <div class='rounded text-center w-100 p-1' style='background-color: #f8d7da; color: #721c24;'>
+                        <p class='m-0 d-flex justify-content-center align-items-center h-100'>Frase Incorreta!</p>
+                    </div>
+                ";
+            }
+        }
+        $_SESSION['erro'] = $erro;
+        $_SESSION['confirmDelete'] = $confirmDelete;
+        header("Location: " . $_SERVER['PHP_SELF']);
         exit;
     }
 ?>
@@ -54,37 +106,22 @@
             </div>
         </div>
         <div class="h-100 w-75 bg-white">
-            <div class="h-auto w-auto mt-4 mt-xxl-5 ms-2 ms-md-4 ms-xxl-5">
-                <h1 class="text-black"> > > My Account</h1>
+            <div class="h-auto w-auto mt-4 mt-xxl-5 ms-1 ms-md-4 ms-xxl-5">
+                <h1 class="text-black"> > > Delete Account</h1>
             </div>
-            <div class="h-auto w-auto mt-5 ms-2 ms-md-4 ms-xxl-5">
-                <div class="gap-3 d-flex mb-4">
-                    <h6 class="m-0">-</h6>
-                    <i class="fa-solid fa-user fs-5"></i>
-                    <h6 class="m-0 text-primary"><?php echo"$nome"; ?></h6>
+            <form action="" method="POST" class="h-auto w-auto mt-4 ms-2 ms-md-4 ms-xxl-5 gap-3">
+                <div class="h-auto w-75 ms-2 ms-md-4 ms-xxl-5">
+                    <p style="text-align: justify;">Deleting your account is permanent. All data and preferences will be removed and cannot be recovered. Save anything important before proceeding. This action is irreversible.</p>
                 </div>
-                <div class="gap-3 d-flex mb-4">
-                    <h6 class="m-0">-</h6>
-                    <i class="fa-solid fa-address-card fs-5"></i>
-                    <h6 class="m-0 text-primary"><?php echo"$cpf"; ?></h6>
+                <div class="h-auto w-75 ms-2 ms-md-4 ms-xxl-5">
+                    <input type="submit" name="submit" class="w-100 btn btn-danger mb-3" value="Delete">
                 </div>
-                <div class="gap-3 d-flex mb-4">
-                    <h6 class="m-0">-</h6>
-                    <i class="fa-solid fa-phone fs-5"></i></i>
-                    <h6 class="m-0 text-primary"><?php echo"$telefone"; ?></h6>
-                </div>
-                <div class="gap-3 d-flex mb-4 me-2">
-                    <h6 class="m-0">-</h6>
-                    <i class="fa-solid fa-envelope fs-5"></i>
-                    <h6 class="m-0 text-primary text-truncate" title="<?php echo $email; ?>"><?php echo"$email"; ?></h6>
-                </div>
-                <div class="gap-3 d-flex mb-4 me-2">
-                    <h6 class="m-0">-</h6>
-                    <i class="fa-solid fa-lock-open fs-5"></i>
-                    <h6 class="m-0 text-primary text-truncate" title="<?php echo $senha; ?>"><?php echo"$senha"; ?></h6>
-                </div>
-            </div>
+                <?php if ($confirmDelete): ?>
+                    <?php echo $confirmDelete; ?>
+                <?php endif; ?>
+            </form>
         </div>
     </div>
 </body>
 </html>
+

@@ -8,7 +8,7 @@
     }
 
     if(isset($_POST['logout'])) {
-        unset($_SESSION['id'], $_SESSION['nome']);
+        unset($_SESSION['id']);
         header("Location: index.php");
         exit;
     }

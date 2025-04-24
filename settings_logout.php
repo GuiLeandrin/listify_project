@@ -16,6 +16,12 @@
         header("Location: index.php");
         exit;
     }
+
+    if(isset($_POST['submit'])) {
+        unset($_SESSION['id']);
+        header("Location: index.php");
+        exit;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -55,34 +61,18 @@
         </div>
         <div class="h-100 w-75 bg-white">
             <div class="h-auto w-auto mt-4 mt-xxl-5 ms-2 ms-md-4 ms-xxl-5">
-                <h1 class="text-black"> > > My Account</h1>
+                <h1 class="text-black"> > > Sign Out</h1>
             </div>
-            <div class="h-auto w-auto mt-5 ms-2 ms-md-4 ms-xxl-5">
-                <div class="gap-3 d-flex mb-4">
-                    <h6 class="m-0">-</h6>
-                    <i class="fa-solid fa-user fs-5"></i>
-                    <h6 class="m-0 text-primary"><?php echo"$nome"; ?></h6>
-                </div>
-                <div class="gap-3 d-flex mb-4">
-                    <h6 class="m-0">-</h6>
-                    <i class="fa-solid fa-address-card fs-5"></i>
-                    <h6 class="m-0 text-primary"><?php echo"$cpf"; ?></h6>
-                </div>
-                <div class="gap-3 d-flex mb-4">
-                    <h6 class="m-0">-</h6>
-                    <i class="fa-solid fa-phone fs-5"></i></i>
-                    <h6 class="m-0 text-primary"><?php echo"$telefone"; ?></h6>
-                </div>
-                <div class="gap-3 d-flex mb-4 me-2">
-                    <h6 class="m-0">-</h6>
-                    <i class="fa-solid fa-envelope fs-5"></i>
-                    <h6 class="m-0 text-primary text-truncate" title="<?php echo $email; ?>"><?php echo"$email"; ?></h6>
-                </div>
-                <div class="gap-3 d-flex mb-4 me-2">
-                    <h6 class="m-0">-</h6>
-                    <i class="fa-solid fa-lock-open fs-5"></i>
-                    <h6 class="m-0 text-primary text-truncate" title="<?php echo $senha; ?>"><?php echo"$senha"; ?></h6>
-                </div>
+            <form action="" method="POST" class="h-auto w-auto mt-4 mt-md-5 ms-2 ms-md-4 ms-xxl-5 d-flex gap-1 gap-md-3">
+                    <div class="w-auto h-auto d-flex align-items-center mb-2">
+                        <h6 class="m-0 text-decoration-underline">Do you want to end your session?</h6>
+                    </div>
+                    <div class="w-auto h-auto me-2 d-flex align-items-center mb-2">
+                        <input type="submit" name="submit" class="w-100 px-5 btn btn-danger" value="Sign Out">
+                    </div>
+            </form>
+            <div class="h-auto w-75 mt-4 ms-2 ms-md-4 ms-xxl-5">
+                <p style="text-align: justify;">Logging out ensures the security of your personal information. If you don’t log out, especially on public devices, others may access your account, sensitive data, or make unauthorized changes. Always click “Log Out” when you're done using the platform to protect your account.</p>
             </div>
         </div>
     </div>

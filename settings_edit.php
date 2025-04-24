@@ -4,11 +4,6 @@
     $log = @$_SESSION['log'];
     unset($_SESSION['log']);
 
-    if(!$id) {
-        header("Location: index.php");
-        exit;
-    }
-
     if($id) {
         $conexao = new mysqli("localhost", "root", "", "website");
         $sql = "SELECT * FROM usuarios WHERE id = '$id';";
@@ -19,6 +14,9 @@
         $senha = @$usuario['senha'];
         $cpf = @$usuario['cpf'];
         $telefone = @$usuario['telefone'];
+    } else {
+        header("Location: index.php");
+        exit;
     }
 
     if(isset($_POST['submit'])) {
@@ -135,10 +133,10 @@
                 <a href="settings_edit.php" class="text-decoration-none border-0 text-dark d-flex flex-column flex-md-row gap-2 align-items-center"><i class="fa-solid fa-user-pen fs-5"></i><h6 class="text-center m-0">Edit Profile</h6></a>
             </div>
             <div class="w-100 h-auto p-3 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
-                <a href="" class="text-decoration-none border-0 text-dark d-flex flex-column flex-md-row gap-2 align-items-center"><i class="fa-solid fa-right-from-bracket fs-5"></i><h6 class="text-center m-0">Sign Out</h6></a>
+                <a href="settings_logout.php" class="text-decoration-none border-0 text-dark d-flex flex-column flex-md-row gap-2 align-items-center"><i class="fa-solid fa-right-from-bracket fs-5"></i><h6 class="text-center m-0">Sign Out</h6></a>
             </div>
             <div class="w-100 h-auto p-3 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
-                <a href="" class="text-decoration-none border-0 text-dark d-flex flex-column flex-md-row gap-2 align-items-center"><i class="fa-solid fa-trash fs-5"></i><h6 class="text-center m-0">Delete Account</h6></a>
+                <a href="settings_delete.php" class="text-decoration-none border-0 text-dark d-flex flex-column flex-md-row gap-2 align-items-center"><i class="fa-solid fa-trash fs-5"></i><h6 class="text-center m-0">Delete Account</h6></a>
             </div>
         </div>
         <div class="h-100 w-75 bg-white">
@@ -151,37 +149,37 @@
                         <?php echo $log; ?>
                     <?php endif; ?>
                     <div class="col-11 col-md-8 col-lg-6 mt-2">
-                        <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
+                        <div class="input-group rounded-3 border border-2 border-dark border-opacity-25">
                             <label for="nome" class="input-group-text bg-transparent border-0 text-decoration-none" style="cursor: text;"><i class="fa-solid fa-user"></i></label>
-                            <input type="text" name="nome" id="nome" class="form-control bg-transparent border-0 shadow-none text-primary" value="<?php echo"$nome"; ?>">
+                            <input type="text" name="nome" id="nome" class="form-control bg-transparent border-0 shadow-none text-secondary" value="<?php echo"$nome"; ?>">
                         </div>
                     </div>
                     <div class="col-11 col-md-8 col-lg-6">
-                        <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
+                        <div class="input-group rounded-3 border border-2 border-dark border-opacity-25">
                             <label for="cpf" class="input-group-text bg-transparent border-0 text-decoration-none" style="cursor: text;"><i class="fa-solid fa-address-card"></i></label>
-                            <input type="text" name="cpf" id="cpf" class="form-control bg-transparent border-0 shadow-none text-primary" value="<?php echo"$cpf"; ?>" maxlength="14" oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2')">
+                            <input type="text" name="cpf" id="cpf" class="form-control bg-transparent border-0 shadow-none text-secondary" value="<?php echo"$cpf"; ?>" maxlength="14" oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2')">
                         </div>
                     </div>
                     <div class="col-11 col-md-8 col-lg-6">
-                        <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
+                        <div class="input-group rounded-3 border border-2 border-dark border-opacity-25">
                             <label for="telefone" class="input-group-text bg-transparent border-0 text-decoration-none" style="cursor: text;"><i class="fa-solid fa-phone"></i></label>
-                            <input type="text" name="telefone" id="telefone" class="form-control bg-transparent border-0 shadow-none text-primary" value="<?php echo"$telefone"; ?>" maxlength="15" oninput="this.value = this.value.replace(/\D/g, '').replace(/^(\d{2})(\d)/g, '($1) $2').replace(/(\d{5})(\d{4})$/, '$1-$2')">
+                            <input type="text" name="telefone" id="telefone" class="form-control bg-transparent border-0 shadow-none text-secondary" value="<?php echo"$telefone"; ?>" maxlength="15" oninput="this.value = this.value.replace(/\D/g, '').replace(/^(\d{2})(\d)/g, '($1) $2').replace(/(\d{5})(\d{4})$/, '$1-$2')">
                         </div>
                     </div>
                     <div class="col-11 col-md-8 col-lg-6">
-                        <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
+                        <div class="input-group rounded-3 border border-2 border-dark border-opacity-25">
                             <label for="email" class="input-group-text bg-transparent border-0 text-decoration-none" style="cursor: text;"><i class="fa-solid fa-envelope"></i></label>
-                            <input type="text" name="email" id="email" class="form-control bg-transparent border-0 shadow-none text-primary" value="<?php echo"$email"; ?>">
+                            <input type="text" name="email" id="email" class="form-control bg-transparent border-0 shadow-none text-secondary" value="<?php echo"$email"; ?>">
                         </div>
                     </div>
                     <div class="col-11 col-md-8 col-lg-6 mb-1">
-                        <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
+                        <div class="input-group rounded-3 border border-2 border-dark border-opacity-25">
                             <label for="senha" class="input-group-text bg-transparent border-0 text-decoration-none" style="cursor: text;"><i class="fa-solid fa-lock-open"></i></label>
-                            <input type="text" name="senha" id="senha" class="form-control bg-transparent border-0 shadow-none text-primary" value="<?php echo"$senha"; ?>">
+                            <input type="text" name="senha" id="senha" class="form-control bg-transparent border-0 shadow-none text-secondary" value="<?php echo"$senha"; ?>">
                         </div>
                     </div>
                     <div class="col-11 col-md-8 col-lg-6 mt-2">
-                        <input type="submit" name="submit" class="w-100 btn btn-success" value="Alterar">
+                        <input type="submit" name="submit" class="w-100 rounded-3 btn btn-success" value="Alterar">
                     </div>
                 </form>
             </div>

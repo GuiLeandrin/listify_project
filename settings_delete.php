@@ -38,7 +38,7 @@
                 <div class='h-auto w-75 mt-2 ms-2 ms-md-4 ms-xxl-5'> 
                     <div class='h-auto w-100 d-flex flex-column align-items-center justify-content-center gap-3'>
                         <input type='text' name='fraseConfirm' class='form-control bg-white border-2' placeholder='xxxxxxxx/confirmExclusion'>
-                        <input type='submit' name='confirmDelete' class='w-100 btn btn-danger' value='Confirm Delete'>
+                        <input type='submit' name='confirmDelete' class='w-100 btn btn-danger mb-3' value='Confirm Delete'>
                     </div>
                 </div>
             </form>
@@ -54,7 +54,7 @@
         $_SESSION['frase'] = "$inicioFrase/confirmExclusion";
         $txtConfirmaExcluir = "
             <div class='h-auto w-auto mt-3 ms-2 ms-md-4 ms-xxl-5 gap-3'>
-                <div class='h-auto w-75 mt-3 ms-2 ms-md-4 ms-xxl-5'>
+                <div class='h-auto w-7 mt-3 ms-2 ms-md-4 ms-xxl-5'>
                     <div class='h-auto w-100'>
                         <p style='text-align: justify;'>Para prosseguir com a exclusão da sua conta, por favor digite a frase de confirmação padrão mostrada abaixo no campo de texto designado:  (" . $_SESSION['frase'] . ")</p>
                     </div>
@@ -66,7 +66,7 @@
                 <div class='h-auto w-75 mt-2 ms-2 ms-md-4 ms-xxl-5'> 
                     <div class='h-auto w-100 d-flex flex-column align-items-center justify-content-center gap-3'>
                         <input type='text' name='fraseConfirm' class='form-control bg-white border-2' placeholder='xxxxxxxx/confirmExclusion'>
-                        <input type='submit' name='confirmDelete' class='w-100 btn btn-danger' value='Confirm Delete'>
+                        <input type='submit' name='confirmDelete' class='w-100 btn btn-danger mb-3' value='Confirm Delete'>
                     </div>
                 </div>
             </form>
@@ -116,8 +116,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/576a6b1350.js" crossorigin="anonymous"></script>
     <title>Settings</title>
+    <style>
+        @media (min-width: 768px) {
+            #responsive {
+                overflow: hidden;
+            }
+        }
+        @media (max-width: 767px) {
+            #responsive {
+                overflow: auto;
+            }
+        }
+    </style>
 </head>
-<body class="vh-100 overflow-hidden">
+<body class="vh-100">
     <div class="w-100 d-flex" style="height: 13vh; background-color: #2c2c2e;">
         <form action="" class="h-100 w-100 d-flex justify-content-between" method="POST">
             <div class="h-100 w-auto d-flex align-items-center ms-4">
@@ -128,8 +140,8 @@
             </div>
         </form>
     </div>
-    <div class="d-flex" style="height: calc(100vh - 13vh);">
-        <div class="h-100 w-25 d-flex flex-column align-items-center" style="background-color: #e0e0e0;">
+    <div class="d-flex" id="responsive" style="height: calc(100vh - 13vh);">
+        <div class="vh-100 w-25 d-flex flex-column align-items-center" style="background-color: #e0e0e0;">
             <div class="w-100 h-auto p-3 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
                 <a href="settings.php" class="text-decoration-none border-0 text-dark d-flex flex-column flex-md-row gap-2 align-items-center"><i class="fa-solid fa-circle-user fs-5"></i><h6 class="text-center m-0">My Account</h6></a>
             </div>

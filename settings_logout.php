@@ -40,7 +40,7 @@
                 <span class="fs-2 fw-bold pb-2 text-white">Settings</span>
             </div>
             <div class="h-100 w-auto d-flex align-items-center me-4 gap-4">
-                <a href="home.php" class="text-decoration-none border-0 text-white"><i class="fa-solid fa-share fa-flip-horizontal fs-5" title="Back to Home"></i></a>
+                <a href="home.php" class="text-decoration-none border-0 text-white"><i class="fa-solid fa-share fa-flip-horizontal fs-5" title="Voltar"></i></a>
             </div>
         </form>
     </div>
@@ -65,14 +65,14 @@
             </div>
             <form action="" method="POST" class="h-auto w-auto mt-4 mt-md-5 ms-2 ms-md-4 ms-xxl-5 d-flex gap-1 gap-md-3">
                     <div class="w-auto h-auto d-flex align-items-center mb-2">
-                        <h6 class="m-0 text-decoration-underline">Do you want to end your session?</h6>
+                        <h6 class="m-0 text-decoration-underline">Você deseja encerrar sua sessão?</h6>
                     </div>
                     <div class="w-auto h-auto me-2 d-flex align-items-center mb-2">
                         <input type="submit" name="submit" class="w-100 px-5 btn btn-danger" value="Sign Out">
                     </div>
             </form>
             <div class="h-auto w-75 mt-4 ms-2 ms-md-4 ms-xxl-5">
-                <p style="text-align: justify;">Logging out ensures the security of your personal information. If you don’t log out, especially on public devices, others may access your account, sensitive data, or make unauthorized changes. Always click “Log Out” when you're done using the platform to protect your account.</p>
+                <p style="text-align: justify;">Encerrar a sessão garante a segurança das suas informações pessoais. Se você não encerrar a sessão, especialmente em dispositivos públicos, outras pessoas podem acessar sua conta, dados sensíveis ou fazer alterações não autorizadas. Sempre clique em "Sair" quando terminar de usar a plataforma para proteger sua conta.</p>
             </div>
         </div>
     </div>

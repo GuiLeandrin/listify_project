@@ -34,7 +34,7 @@
                 <span class="fs-2 fw-bold pb-2 text-white">Settings</span>
             </div>
             <div class="h-100 w-auto d-flex align-items-center me-4 gap-4">
-                <a href="home.php" class="text-decoration-none border-0 text-white"><i class="fa-solid fa-share fa-flip-horizontal fs-5" title="Back to Home"></i></a>
+                <a href="home.php" class="text-decoration-none border-0 text-white"><i class="fa-solid fa-share fa-flip-horizontal fs-5" title="Voltar"></i></a>
             </div>
         </form>
     </div>

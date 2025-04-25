@@ -91,8 +91,8 @@
                 <input type="password" class="form-control bg-transparent border-2" placeholder="Confirme sua nova senha:" name="confirma" id="confirma">
             </div>
             <div class="w-75 mt-4 gap-1 d-flex">
-                <input type="submit" name="submit" value="Alterar" class="btn btn-success w-75">
                 <input type="submit" name="submit" value="Sair" class="btn btn-secondary w-25">
+                <input type="submit" name="submit" value="Alterar" class="btn btn-success w-75">
             </div>
         </form>
     </div>

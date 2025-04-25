@@ -196,8 +196,8 @@
             </div>
             <div class="d-flex flex-column align-items-center justify-content-center mt-3 mb-3">
                 <div class="w-100 d-flex gap-2">
-                    <input type="submit" name="submit" class="btn btn-primary w-100" value="Cadastrar">
                     <a href="index.php" class="btn btn-primary w-100">Login</a>
+                    <input type="submit" name="submit" class="btn btn-primary w-100" value="Cadastrar">
                 </div>
             </div>
         </form>

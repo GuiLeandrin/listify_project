@@ -1,7 +1,10 @@
 <?php
     session_start();
     $id = @$_SESSION['id'];
-    $erro = '';
+    $erro = @$_SESSION['erro'];
+    $txtConfirmaExcluir = @$_SESSION['txtConfirmaExcluir'];
+    $confirmaExcluir = @$_SESSION['confirmaExcluir'];
+    unset($_SESSION['erro'], $_SESSION['confirmaExcluir'], $_SESSION['txtConfirmaExcluir']);
 
     if($id) {
         $conexao = new mysqli("localhost", "root", "", "website");
@@ -18,35 +21,90 @@
         exit;
     }
 
-    if(isset($_POST['excluir']) && $_POST['excluir'] == "1") {
+    if (isset($_POST['delete'])) {
         $inicioFrase = explode('@', $email)[0];
-        $frase = "$inicioFrase/confirmExclusion";
+        $_SESSION['frase'] = "$inicioFrase/confirmExclusion";
+        $txtConfirmaExcluir = "
+            <div class='h-auto w-auto mt-3 ms-2 ms-md-4 ms-xxl-5 gap-3'>
+                <div class='h-auto w-75 mt-3 ms-2 ms-md-4 ms-xxl-5'>
+                    <div class='h-auto w-100'>
+                        <p style='text-align: justify;'>Para prosseguir com a exclusão da sua conta, por favor digite a frase de confirmação padrão mostrada abaixo no campo de texto designado:  (" . $_SESSION['frase'] . ")</p>
+                    </div>
+                </div>
+            </div>
+        ";
+        $confirmaExcluir = "                
+            <form action='' method='POST' class='h-auto w-auto mt-2 ms-2 ms-md-4 ms-xxl-5 gap-3'>
+                <div class='h-auto w-75 mt-2 ms-2 ms-md-4 ms-xxl-5'> 
+                    <div class='h-auto w-100 d-flex flex-column align-items-center justify-content-center gap-3'>
+                        <input type='text' name='fraseConfirm' class='form-control bg-white border-2' placeholder='xxxxxxxx/confirmExclusion'>
+                        <input type='submit' name='confirmDelete' class='w-100 btn btn-danger' value='Confirm Delete'>
+                    </div>
+                </div>
+            </form>
+        ";
+        $_SESSION['erro'] = $erro;
+        $_SESSION['txtConfirmaExcluir'] = $txtConfirmaExcluir;
+        $_SESSION['confirmaExcluir'] = $confirmaExcluir;
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit;
+    }
+    if (isset($_POST['confirmDelete'])) {
+        $inicioFrase = explode('@', $email)[0];
+        $_SESSION['frase'] = "$inicioFrase/confirmExclusion";
+        $txtConfirmaExcluir = "
+            <div class='h-auto w-auto mt-3 ms-2 ms-md-4 ms-xxl-5 gap-3'>
+                <div class='h-auto w-75 mt-3 ms-2 ms-md-4 ms-xxl-5'>
+                    <div class='h-auto w-100'>
+                        <p style='text-align: justify;'>Para prosseguir com a exclusão da sua conta, por favor digite a frase de confirmação padrão mostrada abaixo no campo de texto designado:  (" . $_SESSION['frase'] . ")</p>
+                    </div>
+                </div>
+            </div>
+        ";
+        $confirmaExcluir = "                
+            <form action='' method='POST' class='h-auto w-auto mt-2 ms-2 ms-md-4 ms-xxl-5 gap-3'>
+                <div class='h-auto w-75 mt-2 ms-2 ms-md-4 ms-xxl-5'> 
+                    <div class='h-auto w-100 d-flex flex-column align-items-center justify-content-center gap-3'>
+                        <input type='text' name='fraseConfirm' class='form-control bg-white border-2' placeholder='xxxxxxxx/confirmExclusion'>
+                        <input type='submit' name='confirmDelete' class='w-100 btn btn-danger' value='Confirm Delete'>
+                    </div>
+                </div>
+            </form>
+        ";
+        $frase = @$_SESSION['frase'];
+        $fraseInserida = @$_POST['fraseConfirm'];
+        if($fraseInserida == $frase) {
+            unset($_SESSION['frase']);
+            $delete = "DELETE FROM usuarios WHERE id = '$id';";
+            $exclusao = $conexao->query($delete);
 
-        if(isset($_POST['confirmar']) && $_POST['confirmar'] == "1") {
-            $fraseInserida = @$_POST['fraseConfirm'];
-            if($fraseInserida == $frase) {
-                $delete = "DELETE FROM usuarios WHERE id = '$id';";
-                $exclusao = $conexao->query($delete);
-
-                if($exclusao) {
-                    unset($_SESSION['id']);
-                    header("Location: index.php");
-                    exit;
-                } else {
-                    $erro = "
-                        <div class='rounded text-center w-100 p-1' style='background-color: #f8d7da; color: #721c24;'>
-                            <p class='m-0 d-flex justify-content-center align-items-center h-100'>Erro no Delete!</p>
-                        </div>
-                    ";
-                }
+            if($exclusao) {
+                unset($_SESSION['id']);
+                header("Location: index.php");
+                exit;
             } else {
                 $erro = "
-                    <div class='rounded text-center w-100 p-1' style='background-color: #f8d7da; color: #721c24;'>
-                        <p class='m-0 d-flex justify-content-center align-items-center h-100'>Frase Incorreta!</p>
+                    <div class='h-auto w-auto ms-2 ms-md-4 ms-xxl-5'>
+                        <div class='rounded text-center p-2 h-auto w-75 ms-2 ms-md-4 ms-xxl-5' style='background-color: #f8d7da; color: #721c24;'>
+                            <p class='m-0 d-flex justify-content-center align-items-center'>Erro em Deletar o Usuário</p>
+                        </div>
                     </div>
                 ";
             }
+        } else {
+            $erro = "
+                <div class='h-auto w-auto ms-2 ms-md-4 ms-xxl-5'>
+                    <div class='rounded text-center p-2 h-auto w-75 ms-2 ms-md-4 ms-xxl-5' style='background-color: #f8d7da; color: #721c24;'>
+                        <p class='m-0 d-flex justify-content-center align-items-center'>Frase Incorreta</p>
+                    </div>
+                </div>
+            ";
         }
+        $_SESSION['erro'] = $erro;
+        $_SESSION['txtConfirmaExcluir'] = $txtConfirmaExcluir;
+        $_SESSION['confirmaExcluir'] = $confirmaExcluir;
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit;
     }
 ?>
 <!DOCTYPE html>
@@ -66,7 +124,7 @@
                 <span class="fs-2 fw-bold pb-2 text-white">Settings</span>
             </div>
             <div class="h-100 w-auto d-flex align-items-center me-4 gap-4">
-                <a href="home.php" class="text-decoration-none border-0 text-white"><i class="fa-solid fa-share fa-flip-horizontal fs-5" title="Back to Home"></i></a>
+                <a href="home.php" class="text-decoration-none border-0 text-white"><i class="fa-solid fa-share fa-flip-horizontal fs-5" title="Voltar"></i></a>
             </div>
         </form>
     </div>
@@ -90,32 +148,22 @@
                 <h1 class="text-black"> > > Delete Account</h1>
             </div>
             <form action="" method="POST" class="h-auto w-auto mt-4 ms-2 ms-md-4 ms-xxl-5 gap-3">
-                <input type="hidden" name="excluir" value="1">
                 <div class="h-auto w-75 ms-2 ms-md-4 ms-xxl-5">
-                    <p style="text-align: justify;">Deleting your account is permanent. All data and preferences will be removed and cannot be recovered. Save anything important before proceeding. This action is irreversible.</p>
+                    <p style="text-align: justify;">A exclusão da sua conta é permanente. Todos os dados serão removidos e não poderão ser recuperados. Salve tudo o que for importante antes de prosseguir. Esta ação é irreversível.</p>
                 </div>
-                <div class="h-auto w-75 ms-2 ms-md-4 ms-xxl-5">
-                    <input type="submit" class="w-100 btn btn-danger mb-3" value="Delete">
+                <div class="h-auto w-75 ms-2 ms-md-4 ms-xxl-5 mb-3">
+                    <input type="submit" name="delete" class="w-100 btn btn-danger mb-3" value="Delete">
                 </div>
             </form>
-            <?php if(isset($_POST['excluir']) && $_POST['excluir'] == "1"): ?>
-                <form action="" method="POST" class="h-auto w-auto mt-4 ms-2 ms-md-4 ms-xxl-5 gap-3">
-                    <input type="hidden" name="excluir" value="1">
-                    <input type="hidden" name="confirmar" value="1">
-                    <div class='h-auto w-75 mt-4 ms-2 ms-md-4 ms-xxl-5'> 
-                        <div class='h-auto w-100'>
-                            <p style='text-align: justify;'>To proceed with the deletion of your account, please enter the standard confirmation phrase shown below into the designated text field: <?php echo "($frase)"; ?></p>
-                        </div>
-                        <div class='h-auto w-100 d-flex flex-column align-items-center justify-content-center gap-3'>
-                            <?php if ($erro): ?>
-                                <?php echo $erro; ?>
-                            <?php endif; ?>
-                            <input type='text' name='fraseConfirm' class='form-control bg-white border-2' placeholder='xxxxxxxx/confirmExclusion'>
-                            <input type='submit' class='w-100 btn btn-danger' value='Confirm Delete'>
-                        </div>
-                    </div>
-                </form>
-            <?php endif;?>
+            <?php if ($txtConfirmaExcluir): ?>
+                <?php echo $txtConfirmaExcluir; ?>
+            <?php endif; ?>
+            <?php if ($erro): ?>
+                <?php echo $erro; ?>
+            <?php endif; ?>
+            <?php if ($confirmaExcluir): ?>
+                <?php echo $confirmaExcluir; ?>
+            <?php endif; ?>
         </div>
     </div>
 </body>

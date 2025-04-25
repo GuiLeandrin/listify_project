@@ -28,7 +28,7 @@
             } else {
                 $erro = "
                     <div class='mt-2 rounded text-center w-100 p-2' style='background-color: #f8d7da; color: #721c24;'>
-                        <p class='m-0 d-flex justify-content-center align-items-center h-100'>Este e-mail não possui uma conta!!</p>
+                        <p class='m-0 d-flex justify-content-center align-items-center h-100'>Este e-mail não possui uma conta</p>
                     </div>
                 ";
             }
@@ -74,8 +74,8 @@
                 <input type="password" class="form-control bg-transparent border-0 shadow-none" placeholder="Digite sua senha:" name="senha" id="senha">
             </div>
             <div class="w-75 mt-4 d-flex gap-1">
-                <input type="submit" name="submit" class="btn btn-primary w-100" value="Entrar">
                 <a href="cadastro.php" class="btn btn-primary w-100">Cadastro</a>
+                <input type="submit" name="submit" class="btn btn-primary w-100" value="Entrar">
             </div>
             <div class="mt-5">
                 <h6><a href="login_verifica_cpf.php">Esqueceu sua Senha?</a></h6>

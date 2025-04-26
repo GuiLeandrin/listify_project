@@ -1,4 +1,5 @@
 <?php
+    include 'funcoes.php';
     session_start();
     $id = @$_SESSION['id'];
     $log = @$_SESSION['log'];
@@ -33,29 +34,6 @@
             $cpf = @$_POST['cpf'];
             $telefone = @$_POST['telefone'];
             if(strlen($telefone) == 15 && strlen($cpf) == 14) {
-                
-                //INÍCIO FUNÇÃO VERIFICAÇÃO CPF REAL
-                function validaCPF($cpf) {
-                    // Extrai somente os números
-                    $calculoCpf = preg_replace( '/[^0-9]/is', '', $cpf );
-                    // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
-                    if (preg_match('/(\d)\1{10}/', $calculoCpf)) {
-                        return false;
-                    }
-                    // Faz o calculo para validar o CPF
-                    for ($i = 9; $i < 11; $i++) {
-                        for ($resultadoCpf = 0, $n = 0; $n < $i; $n++) {
-                            $resultadoCpf += $calculoCpf[$n] * (($i + 1) - $n);
-                        }
-                        $resultadoCpf = ((10 * $resultadoCpf) % 11) % 10;
-                        if ($calculoCpf[$n] != $resultadoCpf) {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-                //FIM FUNÇÃO VERIFICAÇÃO CPF REAL
-
                 if(validaCPF($cpf)) {
                     $alteracao = "UPDATE usuarios SET nome = '$nome', email = '$email', senha = '$senha', cpf = '$cpf', telefone = '$telefone' WHERE id = '$id';";
                     $altera = $conexao->query($alteracao);
@@ -125,21 +103,21 @@
         </div>
     </div>
     <div class="d-flex" style="height: calc(100vh - 13vh);">
-        <div class="h-100 w-25 d-flex flex-column align-items-center" style="background-color: #e0e0e0;">
-            <div class="w-100 h-auto p-3 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
+        <div class="h-100 d-flex flex-column align-items-center" style="background-color: #e0e0e0; width: 22vw;">
+            <div class="w-100 h-auto py-3 px-2 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
                 <a href="settings.php" class="text-decoration-none border-0 text-dark d-flex flex-column flex-md-row gap-2 align-items-center"><i class="fa-solid fa-circle-user fs-5"></i><h6 class="text-center m-0">My Account</h6></a>
             </div>
-            <div class="w-100 h-auto p-3 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
+            <div class="w-100 h-auto py-3 px-2 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
                 <a href="settings_edit.php" class="text-decoration-none border-0 text-dark d-flex flex-column flex-md-row gap-2 align-items-center"><i class="fa-solid fa-user-pen fs-5"></i><h6 class="text-center m-0">Edit Profile</h6></a>
             </div>
-            <div class="w-100 h-auto p-3 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
+            <div class="w-100 h-auto py-3 px-2 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
                 <a href="settings_logout.php" class="text-decoration-none border-0 text-dark d-flex flex-column flex-md-row gap-2 align-items-center"><i class="fa-solid fa-right-from-bracket fs-5"></i><h6 class="text-center m-0">Sign Out</h6></a>
             </div>
-            <div class="w-100 h-auto p-3 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
+            <div class="w-100 h-auto py-3 px-2 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
                 <a href="settings_delete.php" class="text-decoration-none border-0 text-dark d-flex flex-column flex-md-row gap-2 align-items-center"><i class="fa-solid fa-trash fs-5"></i><h6 class="text-center m-0">Delete Account</h6></a>
             </div>
         </div>
-        <div class="h-100 w-75 bg-white">
+        <div class="h-100 bg-white" style="width: calc(100vw - 22vw);">
             <div class="h-auto w-auto mt-4 mt-xxl-5 ms-2 ms-md-4 ms-xxl-5">
                 <h1 class="text-black"> > > Edit Profile</h1>
             </div>
@@ -169,13 +147,13 @@
                     <div class="col-11 col-md-8 col-lg-6">
                         <div class="input-group rounded-3 border border-2 border-dark border-opacity-25">
                             <label for="email" class="input-group-text bg-transparent border-0 text-decoration-none" style="cursor: text;"><i class="fa-solid fa-envelope"></i></label>
-                            <input type="text" name="email" id="email" class="form-control bg-transparent border-0 shadow-none text-secondary" value="<?php echo"$email"; ?>">
+                            <input type="email" name="email" id="email" class="form-control bg-transparent border-0 shadow-none text-secondary" value="<?php echo"$email"; ?>">
                         </div>
                     </div>
                     <div class="col-11 col-md-8 col-lg-6 mb-1">
                         <div class="input-group rounded-3 border border-2 border-dark border-opacity-25">
-                            <label for="senha" class="input-group-text bg-transparent border-0 text-decoration-none" style="cursor: text;"><i class="fa-solid fa-lock-open"></i></label>
-                            <input type="text" name="senha" id="senha" class="form-control bg-transparent border-0 shadow-none text-secondary" value="<?php echo"$senha"; ?>">
+                            <button class="input-group-text bg-transparent border-0 text-decoration-none" type="button" onclick="exibirSenha()"><i id="iconeSenha" class="fa-solid fa-lock"></i></button>
+                            <input type="password" name="senha" id="senha" class="form-control bg-transparent border-0 shadow-none text-secondary" value="<?php echo"$senha"; ?>">
                         </div>
                     </div>
                     <div class="col-11 col-md-8 col-lg-6 mt-2">
@@ -185,5 +163,13 @@
             </div>
         </div>
     </div>
+    <script>
+        function exibirSenha() {
+            const botaoEye = document.getElementById("senha");
+            const iconeEye = document.getElementById("iconeSenha");
+            botaoEye.type = botaoEye.type === "password" ? "text" : "password";
+            iconeEye.className = botaoEye.type === "password" ? "fa-solid fa-lock" : "fa-solid fa-lock-open";
+        }
+    </script>
 </body>
 </html>

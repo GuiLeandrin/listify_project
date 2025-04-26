@@ -72,6 +72,7 @@
             <div class="input-group rounded-1 border border-2 border-dark border-opacity-25 w-75 mt-3 mb-2">
                 <label for="senha" class="input-group-text bg-transparent border-0 text-decoration-none"  style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
                 <input type="password" class="form-control bg-transparent border-0 shadow-none" placeholder="Digite sua senha:" name="senha" id="senha">
+                <button class="input-group-text bg-transparent border-0 text-decoration-none" type="button" onclick="exibirSenha()"><i id="iconeSenha" class="fa-solid fa-eye"></i></button>
             </div>
             <div class="w-75 mt-4 d-flex gap-1">
                 <a href="cadastro.php" class="btn btn-primary w-100">Cadastro</a>
@@ -82,5 +83,13 @@
             </div>
         </form>
     </div>
+    <script>
+        function exibirSenha() {
+            const botaoEye = document.getElementById("senha");
+            const iconeEye = document.getElementById("iconeSenha");
+            botaoEye.type = botaoEye.type === "password" ? "text" : "password";
+            iconeEye.className = botaoEye.type === "password" ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+        }
+    </script>
 </body>
 </html>

@@ -45,21 +45,21 @@
         </form>
     </div>
     <div class="d-flex" style="height: calc(100vh - 13vh);">
-        <div class="h-100 w-25 d-flex flex-column align-items-center" style="background-color: #e0e0e0;">
-            <div class="w-100 h-auto p-3 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
+        <div class="h-100 d-flex flex-column align-items-center" style="background-color: #e0e0e0; width: 22vw;">
+            <div class="w-100 h-auto py-3 px-2 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
                 <a href="settings.php" class="text-decoration-none border-0 text-dark d-flex flex-column flex-md-row gap-2 align-items-center"><i class="fa-solid fa-circle-user fs-5"></i><h6 class="text-center m-0">My Account</h6></a>
             </div>
-            <div class="w-100 h-auto p-3 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
+            <div class="w-100 h-auto py-3 px-2 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
                 <a href="settings_edit.php" class="text-decoration-none border-0 text-dark d-flex flex-column flex-md-row gap-2 align-items-center"><i class="fa-solid fa-user-pen fs-5"></i><h6 class="text-center m-0">Edit Profile</h6></a>
             </div>
-            <div class="w-100 h-auto p-3 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
+            <div class="w-100 h-auto py-3 px-2 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
                 <a href="settings_logout.php" class="text-decoration-none border-0 text-dark d-flex flex-column flex-md-row gap-2 align-items-center"><i class="fa-solid fa-right-from-bracket fs-5"></i><h6 class="text-center m-0">Sign Out</h6></a>
             </div>
-            <div class="w-100 h-auto p-3 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
+            <div class="w-100 h-auto py-3 px-2 d-flex align-items-center justify-content-center border-bottom border-2 border-secondary border-opacity-50">
                 <a href="settings_delete.php" class="text-decoration-none border-0 text-dark d-flex flex-column flex-md-row gap-2 align-items-center"><i class="fa-solid fa-trash fs-5"></i><h6 class="text-center m-0">Delete Account</h6></a>
             </div>
         </div>
-        <div class="h-100 w-75 bg-white">
+        <div class="h-100 bg-white" style="width: calc(100vw - 22vw);">
             <div class="h-auto w-auto mt-4 mt-xxl-5 ms-2 ms-md-4 ms-xxl-5">
                 <h1 class="text-black"> > > Sign Out</h1>
             </div>
@@ -67,8 +67,8 @@
                     <div class="w-auto h-auto d-flex align-items-center mb-2">
                         <h6 class="m-0 text-decoration-underline">Você deseja encerrar sua sessão?</h6>
                     </div>
-                    <div class="w-auto h-auto me-2 d-flex align-items-center mb-2">
-                        <input type="submit" name="submit" class="w-100 px-5 btn btn-danger" value="Sign Out">
+                    <div class="w-auto h-auto me-3 d-flex align-items-center justify-content-center mb-2">
+                        <input type="submit" name="submit" class="w-auto px-5 btn btn-danger" value="Sign Out">
                     </div>
             </form>
             <div class="h-auto w-75 mt-4 ms-2 ms-md-4 ms-xxl-5">

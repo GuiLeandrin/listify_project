@@ -1,4 +1,5 @@
 <?php
+    include 'funcoes.php';
     session_start();
     $log = @$_SESSION['log'];
     unset($_SESSION['log']);
@@ -9,34 +10,11 @@
         $telefone = $_POST['telefone_desktop'] ?? $_POST['telefone_mobile'] ?? '';
         $cpf = $_POST['cpf_desktop'] ?? $_POST['cpf_mobile'] ?? '';
         $email = $_POST['email_desktop'] ?? $_POST['email_mobile'] ?? '';
-        $senha = $_POST['senha_desktop'] ?? $_POST['senha_mobile'] ?? '';
-        $confirma = $_POST['confirma_desktop'] ?? $_POST['confirma_mobile'] ?? '';  
+        $senha = $_POST['senha'] ?? '';
+        $confirma = $_POST['confirma'] ?? '';  
 
         if($nome && $telefone && $cpf && $email && $senha && $confirma) {
             if(strlen($telefone) == 15 && strlen($cpf) == 14) {
-                
-                //INÍCIO FUNÇÃO VERIFICAÇÃO CPF REAL
-                function validaCPF($cpf) {
-                    // Extrai somente os números
-                    $calculoCpf = preg_replace( '/[^0-9]/is', '', $cpf );
-                    // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
-                    if (preg_match('/(\d)\1{10}/', $cpf)) {
-                        return false;
-                    }
-                    // Faz o calculo para validar o CPF
-                    for ($i = 9; $i < 11; $i++) {
-                        for ($resultadoCpf = 0, $n = 0; $n < $i; $n++) {
-                            $resultadoCpf += $calculoCpf[$n] * (($i + 1) - $n);
-                        }
-                        $resultadoCpf = ((10 * $resultadoCpf) % 11) % 10;
-                        if ($calculoCpf[$n] != $resultadoCpf) {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-                //FIM FUNÇÃO VERIFICAÇÃO CPF REAL
-
                 if(validaCPF($cpf)) {
                     if($senha == $confirma) {
                         $sql = "SELECT * FROM usuarios WHERE email = '$email' OR cpf = '$cpf';";
@@ -179,18 +157,16 @@
                 </div>
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
-                        <label for="senha_desktop" class="input-group-text bg-transparent border-0 text-decoration-none d-none d-sm-block" style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
-                        <label for="senha_mobile" class="input-group-text bg-transparent border-0 text-decoration-none d-block d-sm-none" style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
-                        <input type="password" class="form-control bg-transparent border-0 shadow-none d-none d-sm-block" placeholder="Digite sua Senha:" name="senha_desktop" id="senha_desktop">
-                        <input type="password" class="form-control bg-transparent border-0 shadow-none d-block d-sm-none" placeholder="Senha:" name="senha_mobile" id="senha_mobile">
+                        <label for="senha" class="input-group-text bg-transparent border-0 text-decoration-none" style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
+                        <input type="password" class="form-control bg-transparent border-0 shadow-none" placeholder="Senha:" name="senha" id="senha">
+                        <button class="input-group-text bg-transparent border-0 text-decoration-none" type="button" onclick="exibirSenha('senha', 'iconeSenha')"><i id="iconeSenha" class="fa-solid fa-eye"></i></button>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-12 mb-3">
                     <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
-                        <label for="confirma_desktop" class="input-group-text bg-transparent border-0 text-decoration-none d-none d-sm-block" style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
-                        <label for="confirma_mobile" class="input-group-text bg-transparent border-0 text-decoration-none d-block d-sm-none" style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
-                        <input type="password" class="form-control bg-transparent border-0 shadow-none d-none d-sm-block" placeholder="Confirme sua Senha:" name="confirma_desktop" id="confirma_desktop">
-                        <input type="password" class="form-control bg-transparent border-0 shadow-none d-block d-sm-none" placeholder="Confirmar:" name="confirma_mobile" id="confirma_mobile">
+                        <label for="confirma" class="input-group-text bg-transparent border-0 text-decoration-none" style="cursor: text;"><i class="fa-solid fa-lock"></i></label>
+                        <input type="password" class="form-control bg-transparent border-0 shadow-none" placeholder="Confirmar:" name="confirma" id="confirma">
+                        <button class="input-group-text bg-transparent border-0 text-decoration-none" type="button" onclick="exibirSenha('confirma', 'iconeConfirma')"><i id="iconeConfirma" class="fa-solid fa-eye"></i></button>
                     </div>
                 </div>
             </div>
@@ -202,5 +178,13 @@
             </div>
         </form>
     </div>
+    <script>
+        function exibirSenha(IdBotao, IdIcone) {
+            const botaoEye = document.getElementById(IdBotao);
+            const iconeEye = document.getElementById(IdIcone);
+            botaoEye.type = botaoEye.type === "password" ? "text" : "password";
+            iconeEye.className = botaoEye.type === "password" ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+        }
+    </script>
 </body>
 </html>

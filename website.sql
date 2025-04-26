@@ -42,7 +42,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `cpf`, `telefone`) VALUES
 (1, 'Guilherme Leandrin Fernandes', 'guileandrin43@gmail.com', '123456', '425.830.898-62', '(14) 98825-7660'),
-(2, 'Marcelly Pereira Lima', 'marcellyp961@gmail.com', '123456', '426.895.754-32', '(14) 99177-4800');
+(2, 'Marcelly Pereira Lima', 'marcellyp961@gmail.com', '123456', '123.456.789-09', '(14) 99177-4800'),
+(3, 'Teste', 'teste@gmail.com', '1', '275.550.198-76', '(11) 11111-1111');
 
 --
 -- Índices para tabelas despejadas

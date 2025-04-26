@@ -1,7 +1,8 @@
 <?php
     session_start();
     $erro = @$_SESSION['erro'];
-    unset($_SESSION['erro']);
+    $email = @$_SESSION['email'];
+    unset($_SESSION['erro'], $_SESSION['email']);
 
     if(isset($_POST['submit'])) {
         $conexao = new mysqli("localhost", "root", "", "website");
@@ -40,6 +41,7 @@
             ";
         }
         $_SESSION['erro'] = $erro;
+        $_SESSION['email'] = $email; 
         header("Location: " . $_SERVER['PHP_SELF']);
         exit;
     }
@@ -67,7 +69,7 @@
             </div>
             <div class="input-group rounded-1 border border-2 border-dark border-opacity-25 w-75 mt-3">
                 <label for="email" class="input-group-text bg-transparent border-0 text-decoration-none"  style="cursor: text;"><i class="fa-solid fa-envelope"></i></label>
-                <input type="email" class="form-control bg-transparent border-0 shadow-none" placeholder="Digite seu e-mail:" name="email" id="email">
+                <input type="email" class="form-control bg-transparent border-0 shadow-none" placeholder="Digite seu e-mail:" name="email" id="email" value="<?php echo $email ?? ''; ?>">
             </div>
             <div class="input-group rounded-1 border border-2 border-dark border-opacity-25 w-75 mt-3 mb-2">
                 <label for="senha" class="input-group-text bg-transparent border-0 text-decoration-none"  style="cursor: text;"><i class="fa-solid fa-lock"></i></label>

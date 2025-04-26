@@ -71,7 +71,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="icon" type="image/png" href="favicon.png">
     <script src="https://kit.fontawesome.com/576a6b1350.js" crossorigin="anonymous"></script>
-    <title>Alterar Senha</title>
+    <title>Redefinir Senha</title>
 </head>
 <body class="vh-100 d-flex align-items-center justify-content-center p-1 row overflow-hidden" style="background: linear-gradient(45deg, #f0f0f0, #d6d6d6);">
     <div class="bg-white shadow-lg rounded-5 d-flex flex-column align-items-center col-md-4 col-sm-8 col-10" style="min-height: 350px; padding: 2rem 0;">

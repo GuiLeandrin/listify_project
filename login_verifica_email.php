@@ -2,7 +2,8 @@
     session_start();
     $cpf = $_SESSION['cpf'] ?? '';
     $erro = @$_SESSION['erro'];
-    unset($_SESSION['erro']);
+    $email = @$_SESSION['email'];
+    unset($_SESSION['erro'], $_SESSION['email']);
 
     if (!$cpf) {
         header("Location: login_verifica_cpf.php");
@@ -37,6 +38,7 @@
             ";
         }
         $_SESSION['erro'] = $erro;
+        $_SESSION['email'] = $email;
         header("Location: " . $_SERVER['PHP_SELF']);
         exit;
     } elseif(isset($_POST['submit']) && $_POST['submit'] === 'Sair') {
@@ -53,7 +55,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="icon" type="image/png" href="favicon.png">
     <script src="https://kit.fontawesome.com/576a6b1350.js" crossorigin="anonymous"></script>
-    <title>Redefinir Senha - Email</title>
+    <title>Redefinir Senha</title>
 </head>
 <body class="vh-100 d-flex align-items-center justify-content-center p-1 row overflow-hidden" style="background: linear-gradient(45deg, #f0f0f0, #d6d6d6);">
     <div class="bg-white shadow-lg rounded-5 d-flex flex-column align-items-center col-md-4 col-sm-8 col-10" style="min-height: 300px; padding: 2rem 0;">
@@ -66,7 +68,7 @@
             <?php endif; ?>
             <div class="w-75">
                 <label for="email" class="form-label" style="cursor: text;">Digite seu E-mail para redefinir sua senha:</label>
-                <input type="email" class="form-control bg-transparent border-2" placeholder="exemplo@dominio.com" name="email" id="email">
+                <input type="email" class="form-control bg-transparent border-2" placeholder="exemplo@dominio.com" name="email" id="email" value="<?php echo $email ?? ''; ?>">
             </div>
             <div class="w-75 mt-3 gap-1 d-flex">
                 <input type="submit" name="submit" value="Sair" class="btn btn-secondary w-25">

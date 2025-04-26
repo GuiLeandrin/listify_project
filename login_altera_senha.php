@@ -84,11 +84,17 @@
         <form action=""  method="POST" class="w-100 h-75 d-flex flex-column align-items-center mt-1">
             <div class="w-75">
                 <label for="senha" class="mb-0 form-label" style="cursor: text;">Nova Senha:</label>
-                <input type="password" class="form-control bg-transparent border-2" placeholder="Digite sua nova senha:" name="senha" id="senha">
+                <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
+                    <input type="password" class="form-control bg-transparent border-0 shadow-none" placeholder="Digite sua nova senha:" name="senha" id="senha">
+                    <button class="input-group-text bg-transparent border-0 text-decoration-none" type="button" onclick="exibirSenha('senha', 'iconeSenha')"><i id="iconeSenha" class="fa-solid fa-eye"></i></button>
+                </div>
             </div>
             <div class="w-75 mt-2 mb-3">
                 <label for="confirma" class="mb-0 form-label" style="cursor: text;">Confirma sua nova Senha:</label>
-                <input type="password" class="form-control bg-transparent border-2" placeholder="Confirme sua nova senha:" name="confirma" id="confirma">
+                <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
+                    <input type="password" class="form-control bg-transparent border-0 shadow-none" placeholder="Confirme sua nova senha:" name="confirma" id="confirma">
+                    <button class="input-group-text bg-transparent border-0 text-decoration-none" type="button" onclick="exibirSenha('confirma', 'iconeConfirma')"><i id="iconeConfirma" class="fa-solid fa-eye"></i></button>
+                </div>
             </div>
             <div class="w-75 mt-4 gap-1 d-flex">
                 <input type="submit" name="submit" value="Sair" class="btn btn-secondary w-25">
@@ -96,5 +102,13 @@
             </div>
         </form>
     </div>
+    <script>
+        function exibirSenha(IdBotao, IdIcone) {
+            const botaoEye = document.getElementById(IdBotao);
+            const iconeEye = document.getElementById(IdIcone);
+            botaoEye.type = botaoEye.type === "password" ? "text" : "password";
+            iconeEye.className = botaoEye.type === "password" ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+        }
+    </script>
 </body>
 </html>

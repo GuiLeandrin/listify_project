@@ -29,7 +29,7 @@
                             $inserir = "INSERT INTO usuarios (nome, email, senha, cpf, telefone) VALUES ('$nome', '$email', '$senha', '$cpf', '$telefone');";
                             $inserirCadastro = $conexao->query($inserir);
     
-                            if($inserirCadastro == true) {
+                            if($inserirCadastro) {
                                 $log = "
                                     <div class='rounded text-center w-100 p-2' style='background-color: #d4edda; color: #155724;'>
                                         <p class='m-0 d-flex justify-content-center align-items-center h-100'>Usuário Cadastrado com sucesso!!</p>

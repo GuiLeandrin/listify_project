@@ -16,12 +16,11 @@
             
             if ($usuario) {
                 if($usuario['senha'] == $senha) {
-                    unset($_SESSION['email']);
+                    $statusLogin = true;
                     $_SESSION['id'] = $usuario['id'];
                     header("Location: home.php");
                     exit;
                 } else {
-                    $_SESSION['email'] = $email; 
                     $erro = "
                         <div class='mt-2 rounded text-center w-100 p-2' style='background-color: #f8d7da; color: #721c24;'>
                             <p class='m-0 d-flex justify-content-center align-items-center h-100'>Senha Incorreta</p>
@@ -41,6 +40,11 @@
                     <p class='m-0 d-flex justify-content-center align-items-center h-100'>Formulário não preenchido corretamente</p>
                 </div>
             ";
+        }
+        if($statusLogin) {
+            unset($_SESSION['email']);
+        } else {
+            $_SESSION['email'] = $email; 
         }
         $_SESSION['erro'] = $erro;
         header("Location: " . $_SERVER['PHP_SELF']);

@@ -1,5 +1,4 @@
 <?php
-
     //INÍCIO FUNÇÃO VERIFICAÇÃO CPF REAL
     function validaCPF($cpf) {
         // Extrai somente os números
@@ -52,5 +51,4 @@
         return ['bloco_texto' => $txtConfirmaExcluir, 'formulario_verifica' => $confirmaExcluir];
     }
     //FIM FUNÇÃO CRIAÇÃO DE VARIÁVEIS DE (FRASE), (TEXTO DO DELETE) E (VERIFICAÇÃO DO DELETE)
-
 ?>

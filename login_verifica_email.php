@@ -71,8 +71,8 @@
                 <input type="email" class="form-control bg-transparent border-2" placeholder="exemplo@dominio.com" name="email" id="email" value="<?php echo $email ?? ''; ?>">
             </div>
             <div class="w-75 mt-3 gap-1 d-flex">
-                <input type="submit" name="submit" value="Sair" class="btn btn-secondary w-25">
                 <input type="submit" name="submit" value="Validar" class="btn btn-success w-75">
+                <input type="submit" name="submit" value="Sair" class="btn btn-secondary w-25">
             </div>
         </form>
     </div>

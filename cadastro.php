@@ -101,11 +101,15 @@
                 </div>
             ";
         }
+        if ($inserirCadastro) {
+            unset($_SESSION['nome'], $_SESSION['telefone'], $_SESSION['cpf'], $_SESSION['email']);
+        } else {
+            $_SESSION['nome'] = $nome;
+            $_SESSION['telefone'] = $telefone;
+            $_SESSION['cpf'] = $cpf;
+            $_SESSION['email'] = $email;
+        }
         $_SESSION['log'] = $log;
-        $_SESSION['nome'] = $nome;
-        $_SESSION['telefone'] = $telefone;
-        $_SESSION['cpf'] = $cpf;
-        $_SESSION['email'] = $email;
         header("Location: " . $_SERVER['PHP_SELF']);
         exit;
     }

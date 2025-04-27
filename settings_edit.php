@@ -99,7 +99,7 @@
             <span class="fs-2 fw-bold pb-2 text-white">Settings</span>
         </div>
         <div class="h-100 w-auto d-flex align-items-center me-4 gap-4">
-            <a href="home.php" class="text-decoration-none border-0 text-white"><i class="fa-solid fa-share fa-flip-horizontal fs-5" title="Voltar"></i></a>
+            <a href="home.php" class="text-decoration-none border-0 text-white" title="Voltar"><i class="fa-solid fa-share fa-flip-horizontal fs-5"></i></a>
         </div>
     </div>
     <div class="d-flex" style="height: calc(100vh - 13vh);">

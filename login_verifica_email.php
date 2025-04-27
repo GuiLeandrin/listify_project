@@ -41,7 +41,7 @@
         $_SESSION['email'] = $email;
         header("Location: " . $_SERVER['PHP_SELF']);
         exit;
-    } elseif(isset($_POST['submit']) && $_POST['submit'] === 'Sair') {
+    } elseif(isset($_POST['enviarSair']) && $_POST['enviarSair'] === 'Sair') {
         unset($_SESSION['cpf']);
         header("Location: index.php");
         exit;
@@ -68,11 +68,11 @@
             <?php endif; ?>
             <div class="w-75">
                 <label for="email" class="form-label" style="cursor: text;">Digite seu E-mail para redefinir sua senha:</label>
-                <input type="email" class="form-control bg-transparent border-2" placeholder="exemplo@dominio.com" name="email" id="email" value="<?php echo $email ?? ''; ?>">
+                <input type="email" class="form-control bg-transparent border-2" placeholder="exemplo@dominio.com" name="email" id="email" value="<?php echo $email ?? ''; ?>" onkeydown="if(event.key === 'Enter'){event.preventDefault(); document.querySelector('input[name=submit]').click();}">
             </div>
             <div class="w-75 mt-3 gap-1 d-flex">
+                <input type="submit" name="enviarSair" value="Sair" class="btn btn-secondary w-25">
                 <input type="submit" name="submit" value="Validar" class="btn btn-success w-75">
-                <input type="submit" name="submit" value="Sair" class="btn btn-secondary w-25">
             </div>
         </form>
     </div>

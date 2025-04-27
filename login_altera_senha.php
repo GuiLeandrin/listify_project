@@ -57,7 +57,7 @@
         $_SESSION['log'] = $log;
         header("Location: " . $_SERVER['PHP_SELF']);
         exit;
-    } elseif(isset($_POST['submit']) && $_POST['submit'] === 'Sair') {
+    } elseif(isset($_POST['enviarSair']) && $_POST['enviarSair'] === 'Sair') {
         unset($_SESSION['cpf'], $_SESSION['email']);
         header("Location: index.php");
         exit;
@@ -85,20 +85,20 @@
             <div class="w-75">
                 <label for="senha" class="mb-0 form-label" style="cursor: text;">Nova Senha:</label>
                 <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
-                    <input type="password" class="form-control bg-transparent border-0 shadow-none" placeholder="Digite sua nova senha:" name="senha" id="senha">
+                    <input type="password" class="form-control bg-transparent border-0 shadow-none" placeholder="Digite sua nova senha:" name="senha" id="senha" onkeydown="if(event.key === 'Enter'){event.preventDefault(); document.querySelector('input[name=submit]').click();}">
                     <button class="input-group-text bg-transparent border-0 text-decoration-none" type="button" onclick="exibirSenha('senha', 'iconeSenha')"><i id="iconeSenha" class="fa-solid fa-eye"></i></button>
                 </div>
             </div>
             <div class="w-75 mt-2 mb-3">
                 <label for="confirma" class="mb-0 form-label" style="cursor: text;">Confirma sua nova Senha:</label>
                 <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
-                    <input type="password" class="form-control bg-transparent border-0 shadow-none" placeholder="Confirme sua nova senha:" name="confirma" id="confirma">
+                    <input type="password" class="form-control bg-transparent border-0 shadow-none" placeholder="Confirme sua nova senha:" name="confirma" id="confirma" onkeydown="if(event.key === 'Enter'){event.preventDefault(); document.querySelector('input[name=submit]').click();}">
                     <button class="input-group-text bg-transparent border-0 text-decoration-none" type="button" onclick="exibirSenha('confirma', 'iconeConfirma')"><i id="iconeConfirma" class="fa-solid fa-eye"></i></button>
                 </div>
             </div>
             <div class="w-75 mt-4 gap-1 d-flex">
+                <input type="submit" name="enviarSair" value="Sair" class="btn btn-secondary w-25">
                 <input type="submit" name="submit" value="Alterar" class="btn btn-success w-75">
-                <input type="submit" name="submit" value="Sair" class="btn btn-secondary w-25">
             </div>
         </form>
     </div>

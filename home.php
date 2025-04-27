@@ -30,8 +30,8 @@
                 <a href="home.php" class="text-decoration-none pb-2 border-0 text-white"><span class="fs-1 fw-bold">Listify</span></a>
             </div>
             <div class="h-100 w-auto d-flex align-items-center me-4 gap-4">
-                <a href="settings.php" class="text-decoration-none border-0 text-white"><i class="fa-solid fa-gear fs-5" stitle="Settings"></i></a>
-                <button name="logout" class="text-decoration-none border-0 p-0 text-white bg-transparent"><i class="fa-solid fa-right-from-bracket fs-5" title="Log Out"></i></button>
+                <a href="settings.php" class="text-decoration-none border-0 text-white" title="Settings"><i class="fa-solid fa-gear fs-5"></i></a>
+                <button name="logout" class="text-decoration-none border-0 p-0 text-white bg-transparent" title="Log Out"><i class="fa-solid fa-right-from-bracket fs-5"></i></button>
             </div>
         </form>
     </div>

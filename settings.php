@@ -34,7 +34,7 @@
                 <span class="fs-2 fw-bold pb-2 text-white">Settings</span>
             </div>
             <div class="h-100 w-auto d-flex align-items-center me-4 gap-4">
-                <a href="home.php" class="text-decoration-none border-0 text-white"><i class="fa-solid fa-share fa-flip-horizontal fs-5" title="Voltar"></i></a>
+                <a href="home.php" class="text-decoration-none border-0 text-white" title="Voltar"><i class="fa-solid fa-share fa-flip-horizontal fs-5"></i></a>
             </div>
         </form>
     </div>
@@ -81,7 +81,8 @@
                 <div class="gap-3 d-flex align-items-center me-2">
                     <h6 class="m-0">-</h6>
                     <button class="bg-transparent border-0 p-0" type="button" onclick="exibirSenha()"><i id="iconeSenha" class="fa-solid fa-lock fs-5"></i></button>
-                    <input type="password" class="form-control bg-transparent border-0 shadow-none d-inline text-primary text-truncate fw-bold p-0" id="senha" value="<?php echo $senha; ?>" title="<?php echo $senha; ?>" readonly>                </div>
+                    <input type="password" class="form-control bg-transparent border-0 shadow-none d-inline text-primary text-truncate fw-bold p-0" id="senha" value="<?php echo $senha; ?>" readonly>
+                </div>
             </div>
         </div>
     </div>
@@ -91,6 +92,12 @@
             const iconeEye = document.getElementById("iconeSenha");
             botaoEye.type = botaoEye.type === "text" ? "password" : "text";
             iconeEye.className = botaoEye.type === "password" ? "fa-solid fa-lock fs-5" : "fa-solid fa-lock-open fs-5";
+            
+            if (botaoEye.type === "password") {
+                botaoEye.removeAttribute("title");
+            } else {
+                botaoEye.setAttribute("title", "<?php echo $senha; ?>");
+            }
         }
     </script>
 </body>

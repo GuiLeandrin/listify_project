@@ -1,8 +1,48 @@
 <?php
     session_start();
     $id = @$_SESSION['id'];
+    $log = @$_SESSION['log'];
+    $idLista = '';
+    $total = 0;
+    $contadorListas = 0;
 
-    if(!$id) {
+    if($id) {
+        $conexao = new mysqli("localhost", "root", "", "website");
+        $sqlLista = "SELECT * FROM listas WHERE id_usuario = '$id';";
+        $listas = $conexao->query($sqlLista);
+        $contadorListas = ($listas->num_rows) + 1;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $verificaIdLista = @$_POST['id_lista'];
+
+            if(isset($_POST['salvar_novo_nome'])) {
+                $nomeNovo = @$_POST['novo_nome_lista'];
+                $sqlNomeLista = "UPDATE listas SET nome = '$nomeNovo' WHERE id = '$verificaIdLista';";
+                $updateNovoNome = $conexao->query($sqlNomeLista);
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit;
+            }
+
+            if(isset($_POST['adicionar_lista'])) {
+                $sqlAddLista = "INSERT INTO listas (nome, id_usuario) VALUES ('Nova Lista #$contadorListas', '$id');";
+                $addLista = $conexao->query($sqlAddLista);
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit;
+            }
+
+            if(isset($_POST['confirma_excluir_lista'])) {
+                $sqlDelLista = "DELETE FROM listas WHERE id = '$verificaIdLista';";
+                $delLista = $conexao->query($sqlDelLista);
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit;
+            }
+
+            if(isset($_POST['voltar_home'])) {
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit;
+            }
+        }
+    } else {
         header("Location: index.php");
         exit;
     }
@@ -48,44 +88,99 @@
     </div>
     <div class="d-flex flex-column align-items-center justify-content-center bg-white" style="height: calc(100vh - 13vh);">
         <div class="container-fluid pt-5 px-md-5 overflow-auto" style="height: calc(100vh - 13vh);">
-            <div class="table-responsive shadow-lg rounded mb-5">
-                <table class="table table-striped table-hover mb-0">
-                    <thead class="table-primary">
-                        <tr>
-                            <th class="p-3 align-middle" colspan="2">nome_tabela</th>
-                            <th class="p-3" colspan="2">
-                                <div class="d-flex justify-content-end gap-1">
-                                    <form action="" method="POST">
-                                        <button name="adicionar_lista" class="text-decoration-none border-0 p-1 px-2 rounded bg-secondary text-white shadow" title="Adicionar Novo Item"><i class="fa-solid fa-plus"></i></button>
-                                        <button name="editar_lista" class="text-decoration-none border-0 p-1 px-2 rounded bg-secondary text-white shadow" title="Editar Nome"><i class="fa-solid fa-pencil"></i></button>
-                                        <button name="excluir_lista" class="text-decoration-none border-0 p-1 px-2 rounded bg-secondary text-white shadow" title="Excluir Lista"><i class="fa-solid fa-trash"></i></button>
-                                    </form>
-                                </div>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group-divider text-center">
-                        <tr class="fw-bold">
-                            <td class="w-25 text-decoration-underline">Nome:</td>
-                            <td class="w-25 text-decoration-underline">Link:</td>
-                            <td class="w-25 text-decoration-underline">Valor:</td>
-                            <td class="w-25 align-middle"><i class="fa-solid fa-gears"></i>:</td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle">nome_item</td>
-                            <td class="align-middle">link_item</td>
-                            <td class="align-middle">valor_item</td>
-                            <td class="gap-1">
-                                <form method="POST" action="">
-                                    <button name="check_item" class="text-decoration-none border-0 rounded shadow" title="Concluído"><i class="fa-solid fa-check"></i></button>
-                                    <button name="editar_item" class="text-decoration-none border-0 rounded shadow" title="Editar Item"><i class="fa-solid fa-pen"></i></button>
-                                    <button name="excluir_item" class="text-decoration-none border-0 rounded shadow" title="Excluir Item"><i class="fa-solid fa-minus"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <?php while ($usuarioLista = $listas->fetch_assoc()): ?>
+                <?php 
+                    $idLista = $usuarioLista['id']; 
+                    $sqlItem = "SELECT * FROM itens WHERE id_lista = '$idLista';";
+                    $itens = $conexao->query($sqlItem);
+                ?>
+                <div class="table-responsive shadow-lg rounded mb-5">
+                    <table class="table table-striped table-hover mb-0">
+                        <thead class="table-primary">
+                            <form action="" method="POST">
+                                <input type="hidden" name="id_lista" value="<?php echo $idLista; ?>">
+                                <tr>
+                                    <?php if(isset($_POST['editar_lista']) && $_POST['id_lista'] == $idLista): ?>
+                                        <th class="p-3 align-middle fs-5" colspan="2">
+                                            <input type="text" class="border-0 bg-transparent w-100" value="<?php echo $usuarioLista['nome']; ?>" maxlength="20" style="max-width: 300px; outline: none;" placeholder="Digite o novo nome..." name="novo_nome_lista">
+                                        </th>
+                                        <th class="p-3 align-middle" colspan="2">
+                                            <div class="d-flex justify-content-end gap-1">
+                                                <button name="salvar_novo_nome" class="text-decoration-none px-4 border-0 rounded bg-success text-white shadow" title="Salvar Novo Nome"><i class="fa-solid fa-check"></i></button>
+                                                <button name="voltar_home" class="px-4 text-decoration-none border-0 rounded bg-secondary text-white shadow" title="Voltar"><i class="fa-solid fa-share fa-flip-horizontal"></i></button>
+                                            </div>
+                                        </th>
+                                    <?php elseif (isset($_POST['excluir_lista']) && $_POST['id_lista'] == $idLista): ?>
+                                        <th class="text-danger p-3" colspan="2">
+                                            <h3 class="my-2 m-0 fw-bold">Deseja mesmo excluir essa lista?</h3>
+                                        </th>
+                                        <th class="p-3 align-middle" colspan="2">
+                                            <div class="d-flex justify-content-end gap-1">
+                                                <button name="confirma_excluir_lista" class="text-decoration-none px-4 border-0 rounded bg-danger text-white shadow" title="Confirmar Exclusão de Lista"><i class="fa-solid fa-trash"></i></button>
+                                                <button name="voltar_home" class="px-4 text-decoration-none border-0 rounded bg-secondary text-white shadow" title="Voltar"><i class="fa-solid fa-share fa-flip-horizontal"></i></button>
+                                            </div>
+                                        </th>
+                                    <?php else: ?>
+                                        <th class="p-3 align-middle fs-3" colspan="2">
+                                            <?php echo $usuarioLista['nome']; ?>
+                                        </th>
+                                        <th class="p-3 align-middle" colspan="2">
+                                            <div class="d-flex flex-column justify-content-end gap-1">
+                                                <div class="d-flex justify-content-end gap-1">
+                                                    <button name="editar_lista" class="px-4 text-decoration-none border-0 rounded bg-primary text-white shadow" title="Editar Nome da Lista"><i class="fa-solid fa-pencil"></i></button>
+                                                    <button name="excluir_lista" class="px-4 text-decoration-none border-0 rounded bg-primary text-white shadow" title="Excluir Lista"><i class="fa-solid fa-trash"></i></button>
+                                                </div>
+                                                <div class="d-flex justify-content-end">
+                                                    <button name="adicionar_item" class="text-decoration-none border-0 rounded bg-secondary text-white shadow" title="Adicionar Novo Item" style="width: 130px;"><i class="fa-solid fa-plus"></i></button>
+                                                </div>
+                                            </div>
+                                        </th>
+                                    <?php endif; ?>
+                                </tr>
+                            </form>
+                        </thead>
+                        <tbody class="table-group-divider text-center">
+                            <tr class="fw-bold">
+                                <td class="w-25 text-decoration-underline">Nome:</td>
+                                <td class="w-25 text-decoration-underline">Link:</td>
+                                <td class="w-25 text-decoration-underline">Valor:</td>
+                                <td class="w-25 align-middle"><i class="fa-solid fa-gears"></i>:</td>
+                            </tr>
+                            <?php $total = 0; ?>
+                            <?php while ($usuarioItem = $itens->fetch_assoc()): ?>
+                                <tr>
+                                    <td class="text-break align-middle"><?php echo $usuarioItem['nome']; ?></td>
+                                    <td class="text-break align-middle"><?php echo $usuarioItem['link']; ?></td>
+                                    <td class="align-middle"><?php echo $usuarioItem['valor']; ?></td>
+                                    <td class="gap-1 align-middle">
+                                        <form method="POST" action="">
+                                            <button name="check_item" class="px-2 text-decoration-none border-0 rounded shadow" title="Concluído"><i class="fa-solid fa-check"></i></button>
+                                            <button name="editar_item" class="text-dark p-1 px-2 text-decoration-none border-0 rounded shadow" title="Editar Item"><i class="fa-solid fa-pen"></i></button>
+                                            <button name="excluir_item" class="text-dark p-1 px-2 text-decoration-none border-0 rounded shadow" title="Excluir Item"><i class="fa-solid fa-minus"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <?php
+                                    $total = $total + $usuarioItem['valor'];
+                                ?>
+                            <?php endwhile; ?>
+                            <?php if ($itens->num_rows > 0): ?>
+                                <tr class="fw-bold align-middle">
+                                    <td class="text-decoration-underline text-secondary">Total:</td>
+                                    <td></td>
+                                    <td class="text-secondary"><?php echo "R$ " . number_format($total, 2, ',', '.'); ?></td>
+                                    <td></td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php endwhile; ?>
+            <form action="" method="POST">
+                <div class="w-100 mb-5">
+                    <button name="adicionar_lista" class="w-100 btn btn-success text-white p-2"><i class="fa-solid fa-plus pe-2"></i>Adicionar Nova Lista</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>

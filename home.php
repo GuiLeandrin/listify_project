@@ -213,7 +213,7 @@
                                             <tr>
                                                 <td style="max-width: 80px;" class="text-truncate text-secondary align-middle text-decoration-line-through"><?php echo $usuarioItem['nome']; ?></td>
                                                 <td style="max-width: 80px;" class="text-truncate text-secondary align-middle text-decoration-line-through"><?php echo $usuarioItem['link']; ?></td>
-                                                <td class="align-middle text-secondary text-decoration-line-through"><?php echo $usuarioItem['valor']; ?></td>
+                                                <td class="align-middle text-secondary text-decoration-line-through"><?php echo "R$ " . $usuarioItem['valor']; ?></td>
                                                 <td class="gap-1 align-middle">
                                                     <button name="uncheck_item" class="px-2 text-decoration-none border-0 rounded shadow" title="Desmarcar"><i class="fa-solid fa-xmark"></i></button>
                                                 </td>
@@ -258,8 +258,10 @@
                                             <?php else: ?>
                                                 <tr>
                                                     <td style="max-width: 80px;" title="<?php echo $usuarioItem['nome']; ?>" class="text-truncate align-middle"><?php echo $usuarioItem['nome']; ?></td>
-                                                    <td style="max-width: 80px" title="<?php echo $usuarioItem['link']; ?>" class="text-truncate align-middle"><?php echo $usuarioItem['link']; ?></td>
-                                                    <td class="align-middle"><?php echo $usuarioItem['valor']; ?></td>
+                                                    <td style="max-width: 80px" title="<?php echo $usuarioItem['link']; ?>" class="text-truncate align-middle">
+                                                        <a href="<?php echo $usuarioItem['link']; ?>" target="_blank"><?php echo $usuarioItem['link']; ?></a>
+                                                    </td>
+                                                    <td class="align-middle"><?php echo "R$ " . $usuarioItem['valor']; ?></td>
                                                     <td class="gap-1 align-middle">
                                                         <button name="check_item" class="px-2 p-1 text-decoration-none border-0 rounded shadow" title="Concluído"><i class="fa-solid fa-check"></i></button>
                                                         <button name="editar_item" class="text-dark p-1 px-2 text-decoration-none border-0 rounded shadow" title="Editar Item"><i class="fa-solid fa-pen"></i></button>

@@ -5,7 +5,7 @@
     unset($_SESSION['erro'], $_SESSION['email']);
 
     if(isset($_POST['submit'])) {
-        $conexao = new mysqli("localhost", "root", "", "website");
+        $conexao = new mysqli("localhost", "root", "", "listify");
         $email = @$_POST['email'];
         $senha = @$_POST['senha'];
 

@@ -3,7 +3,7 @@
     $id = @$_SESSION['id'];
 
     if($id) {
-        $conexao = new mysqli("localhost", "root", "", "website");
+        $conexao = new mysqli("localhost", "root", "", "listify");
         $sql = "SELECT * FROM usuarios WHERE id = '$id';";
         $verifica = $conexao->query($sql);
         $usuario = $verifica->fetch_assoc();

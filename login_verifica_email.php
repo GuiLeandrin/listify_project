@@ -11,7 +11,7 @@
     }
 
     if(isset($_POST['submit']) && $_POST['submit'] === 'Validar') {
-        $conexao = new mysqli("localhost", "root", "", "website");
+        $conexao = new mysqli("localhost", "root", "", "listify");
         $email = @$_POST['email'];
 
         if($email) {

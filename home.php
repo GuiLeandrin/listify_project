@@ -7,7 +7,7 @@
     $contadorItens = 0;
 
     if($id) {
-        $conexao = new mysqli("localhost", "root", "", "website");
+        $conexao = new mysqli("localhost", "root", "", "listify");
         $sqlLista = "SELECT * FROM listas WHERE id_usuario = '$id';";
         $listas = $conexao->query($sqlLista);
         $contadorListas = ($listas->num_rows) + 1;
@@ -50,11 +50,35 @@
             }
 
             if(isset($_POST['salvar_infos_item'])) {
-                $nomeItemNovo = @$_POST['novo_nome_item'];
-                $linkItemNovo = @$_POST['novo_link_item'];
-                $valorItemNovo = @$_POST['novo_valor_item'];
-                $sqlInfosItem = "UPDATE itens SET nome = '$nomeItemNovo', link = '$linkItemNovo', valor = '$valorItemNovo' WHERE id = '$recebeIdItem';";
-                $updateInfosItem = $conexao->query($sqlInfosItem);
+                if($_POST['novo_nome_item']) {
+                    $nomeItemNovo = @$_POST['novo_nome_item'];
+                    $linkItemNovo = @$_POST['novo_link_item'];
+                    $valorItemNovo = @$_POST['novo_valor_item'];
+                    $sqlInfosItem = "UPDATE itens SET nome = '$nomeItemNovo', link = '$linkItemNovo', valor = '$valorItemNovo' WHERE id = '$recebeIdItem';";
+                    $updateInfosItem = $conexao->query($sqlInfosItem);
+                    header("Location: " . $_SERVER['PHP_SELF']);
+                    exit;
+                }
+            }
+
+            if(isset($_POST['confirma_excluir_item'])) {
+                $sqlDelItem = "DELETE FROM itens WHERE id = '$recebeIdItem';";
+                $delItem = $conexao->query($sqlDelItem);
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit;
+            }
+
+            if(isset($_POST['check_item'])) {
+                $sqlOnStatus = "UPDATE itens SET status = 1 WHERE id = '$recebeIdItem';";
+                $onStatus = $conexao->query($sqlOnStatus);
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit;
+            }
+
+            
+            if(isset($_POST['uncheck_item'])) {
+                $sqlOffStatus = "UPDATE itens SET status = 0 WHERE id = '$recebeIdItem';";
+                $offStatus = $conexao->query($sqlOffStatus);
                 header("Location: " . $_SERVER['PHP_SELF']);
                 exit;
             }
@@ -181,36 +205,74 @@
                                 <?php $total = 0; ?>
                                 <?php while ($usuarioItem = $itens->fetch_assoc()): ?>
                                     <?php $idItem = $usuarioItem['id']; ?>
+                                    <?php $statusItem = (bool)$usuarioItem['status']; ?>
                                     <form action="#lista_<?php echo $idLista; ?>" method="POST">
+                                        <input type="hidden" name="id_lista" value="<?php echo $idLista; ?>">
                                         <input type="hidden" name="id_item" value="<?php echo $idItem; ?>">
-                                        <?php if(isset($_POST['editar_item']) && $_POST['id_item'] == $idItem): ?>
+                                        <?php if ($statusItem): ?>
                                             <tr>
-                                                <td class="text-break align-middle">
-                                                    <input value="<?php echo $usuarioItem['nome']; ?>" type="text" class="my-2 text-center fw-bold border-0 bg-transparent w-100" style="max-width: 150px; outline: none;" placeholder="Digite o nome..." name="novo_nome_item">
-                                                </td>
-                                                <td class="text-break align-middle">
-                                                    <input value="<?php echo $usuarioItem['link']; ?>" type="text" class="text-center fw-bold border-0 bg-transparent w-100" style="max-width: 150px; outline: none;" placeholder="Digite o link..." name="novo_link_item">
-                                                <td class="align-middle">
-                                                    <input value="<?php echo $usuarioItem['valor']; ?>" type="number" step="0.01" class="text-center fw-bold border-0 bg-transparent w-100" style="max-width: 150px; outline: none;" placeholder="Digite o valor..." name="novo_valor_item">
-                                                </td>
+                                                <td style="max-width: 80px;" class="text-truncate text-secondary align-middle text-decoration-line-through"><?php echo $usuarioItem['nome']; ?></td>
+                                                <td style="max-width: 80px;" class="text-truncate text-secondary align-middle text-decoration-line-through"><?php echo $usuarioItem['link']; ?></td>
+                                                <td class="align-middle text-secondary text-decoration-line-through"><?php echo $usuarioItem['valor']; ?></td>
                                                 <td class="gap-1 align-middle">
-                                                    <button name="salvar_infos_item" class="text-decoration-none px-3 border-0 rounded bg-success text-white shadow" title="Salvar Alterações"><i class="fa-solid fa-check"></i></button>
-                                                    <button name="voltar_home" class="px-3 text-decoration-none border-0 rounded bg-secondary text-white shadow" title="Voltar"><i class="fa-solid fa-share fa-flip-horizontal"></i></button>
+                                                    <button name="uncheck_item" class="px-2 text-decoration-none border-0 rounded shadow" title="Desmarcar"><i class="fa-solid fa-xmark"></i></button>
                                                 </td>
                                             </tr>
                                         <?php else: ?>
-                                            <tr>
-                                                <td class="text-break align-middle"><?php echo $usuarioItem['nome']; ?></td>
-                                                <td class="text-break align-middle"><?php echo $usuarioItem['link']; ?></td>
-                                                <td class="align-middle"><?php echo $usuarioItem['valor']; ?></td>
-                                                <td class="gap-1 align-middle">
-                                                    <button name="check_item" class="px-2 text-decoration-none border-0 rounded shadow" title="Concluído"><i class="fa-solid fa-check"></i></button>
-                                                    <button name="editar_item" class="text-dark p-1 px-2 text-decoration-none border-0 rounded shadow" title="Editar Item"><i class="fa-solid fa-pen"></i></button>
-                                                    <button name="excluir_item" class="text-dark p-1 px-2 text-decoration-none border-0 rounded shadow" title="Excluir Item"><i class="fa-solid fa-minus"></i></button>
-                                                </td>
-                                            </tr>
+                                            <?php if((isset($_POST['editar_item']) || isset($_POST['voltar_editar_item'])) && $_POST['id_item'] == $idItem): ?>
+                                                <tr>
+                                                    <td class="text-break align-middle" style="background-color: #d6ede4;">
+                                                        <input value="<?php echo $usuarioItem['nome']; ?>" type="text" class="my-2 text-center fw-bold border-0 bg-transparent w-100" style="max-width: 150px; outline: none;" placeholder="Nome..." name="novo_nome_item">
+                                                    </td>
+                                                    <td class="text-break align-middle" style="background-color: #d6ede4;">
+                                                        <input value="<?php echo $usuarioItem['link']; ?>" type="text" class="text-center fw-bold border-0 bg-transparent w-100" style="max-width: 150px; outline: none;" placeholder="Link..." name="novo_link_item">
+                                                    <td class="align-middle" style="background-color: #d6ede4;">
+                                                        <input value="<?php echo $usuarioItem['valor']; ?>" type="number" step="0.01" class="text-center fw-bold border-0 bg-transparent w-100" style="max-width: 150px; outline: none;" placeholder="Valor..." name="novo_valor_item">
+                                                    </td>
+                                                    <td class="gap-1 align-middle" style="background-color: #d6ede4;">
+                                                        <button name="salvar_infos_item" class="text-decoration-none px-3 border-0 rounded bg-success text-white shadow" title="Salvar Alterações"><i class="fa-solid fa-check"></i></button>
+                                                        <button name="voltar_home" class="mt-1 mt-md-0 px-3 text-decoration-none border-0 rounded bg-secondary text-white shadow" title="Voltar"><i class="fa-solid fa-share fa-flip-horizontal"></i></button>
+                                                    </td>
+                                                </tr>
+                                            <?php elseif(isset($_POST['salvar_infos_item']) && $_POST['id_item'] == $idItem): ?>
+                                                <?php if(!$_POST['novo_nome_item']): ?>
+                                                    <tr>
+                                                        <td style="background-color: #f8d7da;" colspan="3">
+                                                            <h4 class="m-0 my-1 ms-3 text-start text-danger">Nome do item não preenchido!</h4>
+                                                        </td>
+                                                        <td style="background-color: #f8d7da;" class="gap-1 align-middle">
+                                                            <button name="voltar_editar_item" class="px-5 text-decoration-none border-0 rounded bg-secondary text-white shadow" title="Voltar"><i class="fa-solid fa-share fa-flip-horizontal"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                <?php endif; ?>
+                                            <?php elseif(isset($_POST['excluir_item']) && $_POST['id_item'] == $idItem): ?>
+                                                <tr>
+                                                    <td style="background-color: #f8d7da;" colspan="3">
+                                                        <h4 class="m-0 my-1 ms-3 text-start text-danger">Deseja mesmo excluir esse item?</h4>
+                                                    </td>
+                                                    <td style="background-color: #f8d7da;" class="gap-1 align-middle">
+                                                        <button name="confirma_excluir_item" class="text-decoration-none px-3 border-0 rounded bg-danger text-white shadow" title="Confirmar Exclusão de Item"><i class="fa-solid fa-trash"></i></button>
+                                                        <button name="voltar_home" class="mt-1 mt-md-0 px-3 text-decoration-none border-0 rounded bg-secondary text-white shadow" title="Voltar"><i class="fa-solid fa-share fa-flip-horizontal"></i></button>
+                                                    </td>
+                                                </tr>
+                                            <?php else: ?>
+                                                <tr>
+                                                    <td style="max-width: 80px;" title="<?php echo $usuarioItem['nome']; ?>" class="text-truncate align-middle"><?php echo $usuarioItem['nome']; ?></td>
+                                                    <td style="max-width: 80px" title="<?php echo $usuarioItem['link']; ?>" class="text-truncate align-middle"><?php echo $usuarioItem['link']; ?></td>
+                                                    <td class="align-middle"><?php echo $usuarioItem['valor']; ?></td>
+                                                    <td class="gap-1 align-middle">
+                                                        <button name="check_item" class="px-2 p-1 text-decoration-none border-0 rounded shadow" title="Concluído"><i class="fa-solid fa-check"></i></button>
+                                                        <button name="editar_item" class="text-dark p-1 px-2 text-decoration-none border-0 rounded shadow" title="Editar Item"><i class="fa-solid fa-pen"></i></button>
+                                                        <button name="excluir_item" class="mt-1 mt-md-0 text-dark p-1 px-2 text-decoration-none border-0 rounded shadow" title="Excluir Item"><i class="fa-solid fa-minus"></i></button>
+                                                    </td>
+                                                </tr>
+                                            <?php endif; ?>
                                         <?php endif; ?>
-                                        <?php $total = $total + $usuarioItem['valor']; ?>
+                                        <?php if(!$statusItem): ?>
+                                            <?php $total = $total + $usuarioItem['valor']; ?>
+                                        <?php else: ?>
+                                            <?php $total = $total; ?>
+                                        <?php endif; ?>
                                     </form>
                                 <?php endwhile; ?>
                                 <?php if ($itens->num_rows > 0): ?>

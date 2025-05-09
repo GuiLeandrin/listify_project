@@ -9,7 +9,7 @@
     unset($_SESSION['log'], $_SESSION['nome'], $_SESSION['telefone'], $_SESSION['cpf'], $_SESSION['email']);
 
     if(isset($_POST['submit'])) {
-        $conexao = new mysqli("localhost", "root", "", "website");
+        $conexao = new mysqli("localhost", "root", "", "listify");
         $nome = $_POST['nome_desktop'] ?? $_POST['nome_mobile'] ?? '';
         $telefone = $_POST['telefone_desktop'] ?? $_POST['telefone_mobile'] ?? '';
         $cpf = $_POST['cpf_desktop'] ?? $_POST['cpf_mobile'] ?? '';
@@ -139,8 +139,8 @@
                     <div class="input-group rounded-1 border border-2 border-dark border-opacity-25">
                         <label for="nome_desktop" class="input-group-text bg-transparent border-0 text-decoration-none d-none d-sm-block" style="cursor: text;"><i class="fa-solid fa-user"></i></label>
                         <label for="nome_mobile" class="input-group-text bg-transparent border-0 text-decoration-none d-block d-sm-none" style="cursor: text;"><i class="fa-solid fa-user"></i></label>
-                        <input value="<?php echo $nome ?? ''; ?>" type="text" class="form-control bg-transparent border-0 shadow-none d-none d-sm-block" placeholder="Digite seu Nome:" name="nome_desktop" id="nome_desktop">
-                        <input value="<?php echo $nome ?? ''; ?>" type="text" class="form-control bg-transparent border-0 shadow-none d-block d-sm-none" placeholder="Nome:" name="nome_mobile" id="nome_mobile">
+                        <input value="<?php echo $nome ?? ''; ?>" oninput="this.value = this.value.replace(/\d/g, '')"  type="text" class="form-control bg-transparent border-0 shadow-none d-none d-sm-block" placeholder="Digite seu Nome:" name="nome_desktop" id="nome_desktop">
+                        <input value="<?php echo $nome ?? ''; ?>" oninput="this.value = this.value.replace(/\d/g, '')" type="text" class="form-control bg-transparent border-0 shadow-none d-block d-sm-none" placeholder="Nome:" name="nome_mobile" id="nome_mobile">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-12">

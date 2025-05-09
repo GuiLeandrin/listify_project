@@ -5,7 +5,7 @@
     unset($_SESSION['erro'], $_SESSION['cpf']);
 
     if(isset($_POST['submit'])) {
-        $conexao = new mysqli("localhost", "root", "", "website");
+        $conexao = new mysqli("localhost", "root", "", "listify");
         $cpf = @$_POST['cpf'];
         
         if($cpf) {

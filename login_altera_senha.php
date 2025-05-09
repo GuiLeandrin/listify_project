@@ -11,7 +11,7 @@
     }
 
     if(isset($_POST['submit']) && $_POST['submit'] === 'Alterar') {
-        $conexao = new mysqli("localhost", "root", "", "website");
+        $conexao = new mysqli("localhost", "root", "", "listify");
         $senha = @$_POST['senha'];
         $confirma = @$_POST['confirma'];
 

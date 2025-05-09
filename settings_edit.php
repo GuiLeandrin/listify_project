@@ -6,7 +6,7 @@
     unset($_SESSION['log']);
 
     if($id) {
-        $conexao = new mysqli("localhost", "root", "", "website");
+        $conexao = new mysqli("localhost", "root", "", "listify");
         $sql = "SELECT * FROM usuarios WHERE id = '$id';";
         $verifica = $conexao->query($sql);
         $usuario = $verifica->fetch_assoc();
@@ -129,7 +129,7 @@
                     <div class="col-11 col-md-8 col-lg-6 mt-2">
                         <div class="input-group rounded-3 border border-2 border-dark border-opacity-25">
                             <label for="nome" class="input-group-text bg-transparent border-0 text-decoration-none" style="cursor: text;"><i class="fa-solid fa-user"></i></label>
-                            <input type="text" name="nome" id="nome" class="form-control bg-transparent border-0 shadow-none text-secondary" value="<?php echo"$nome"; ?>">
+                            <input type="text" oninput="this.value = this.value.replace(/\d/g, '')" name="nome" id="nome" class="form-control bg-transparent border-0 shadow-none text-secondary" value="<?php echo"$nome"; ?>">
                         </div>
                     </div>
                     <div class="col-11 col-md-8 col-lg-6">

@@ -13,7 +13,7 @@
         <p class="m-0 fs-5 col-11 col-md-8">Organize suas listas de compras de uma forma mais simples, prática e eficiente. Cadastre produtos, links de compra e valores estimados em um só lugar.</p>
         <a href="login.php" class="btn bg-white fw-bold text-dark py-2 px-4 shadow-lg">Experimente</a>
     </div>
-    <div class="w-100 p-4 d-flex align-items-center flex-grow-1 bg-light">
+    <div class="w-100 p-4 d-flex align-items-center justify-content-center flex-grow-1 bg-light">
         <div class="row">
             <div class="mb-4 mb-md-0 col-12 col-md-4">
                 <div class="p-3 h-100 rounded-3 bg-white shadow">

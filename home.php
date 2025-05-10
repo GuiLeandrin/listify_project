@@ -164,7 +164,7 @@
                                     <tr>
                                         <?php if(isset($_POST['editar_lista']) && $_POST['id_lista'] == $idLista): ?>
                                             <th class="p-3 align-middle fs-5" colspan="2">
-                                                <input type="text" class="fw-bold border-0 my-2 bg-transparent w-100" maxlength="20" style="max-width: 300px; outline: none;" placeholder="Digite o novo nome..." name="novo_nome_lista" autofocus>
+                                                <input type="text" class="fw-bold border-0 my-2 bg-transparent w-100" maxlength="20" style="max-width: 300px; outline: none;" placeholder="Digite o novo nome..." id="input_nome" name="novo_nome_lista">
                                             </th>
                                             <th class="p-3 align-middle" colspan="2">
                                                 <div class="d-flex justify-content-end gap-1">
@@ -228,7 +228,7 @@
                                         <?php if((isset($_POST['editar_item']) || isset($_POST['voltar_editar_item'])) && $_POST['id_item'] == $idItem): ?>
                                             <tr id="item_<?php echo $idItem; ?>">
                                                 <td class="text-break align-middle" style="background-color: #d6ede4;">
-                                                    <input value="<?php echo $usuarioItem['nome']; ?>" type="text" class="my-2 text-center fw-bold border-0 bg-transparent w-100" style="max-width: 150px; outline: none;" placeholder="Nome..." name="novo_nome_item">
+                                                    <input value="<?php echo $usuarioItem['nome']; ?>" type="text" class="my-2 text-center fw-bold border-0 bg-transparent w-100" style="max-width: 150px; outline: none;" placeholder="Nome..." id="input_nome" name="novo_nome_item">
                                                 </td>
                                                 <td class="text-break align-middle" style="background-color: #d6ede4;">
                                                     <input value="<?php echo $usuarioItem['link']; ?>" type="text" class="text-center fw-bold border-0 bg-transparent w-100" style="max-width: 150px; outline: none;" placeholder="Link..." name="novo_link_item">
@@ -303,6 +303,12 @@
         </div>
     </div>
     <script>
+        window.onload = function () {
+            const inputNome = document.getElementById("input_nome");
+            if (inputNome) {
+                inputNome.focus();
+            }
+        };
         setTimeout(() => {
             if (window.location.hash.startsWith("#lista_") || window.location.hash.startsWith("#item_")) {
                 history.replaceState(null, null, window.location.pathname);

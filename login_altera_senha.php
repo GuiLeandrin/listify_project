@@ -59,7 +59,7 @@
         exit;
     } elseif(isset($_POST['enviarSair']) && $_POST['enviarSair'] === 'Sair') {
         unset($_SESSION['cpf'], $_SESSION['email']);
-        header("Location: index.php");
+        header("Location: login.php");
         exit;
     }
 ?>

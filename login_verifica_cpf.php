@@ -69,7 +69,7 @@
                 <input type="text" class="form-control bg-transparent border-2" value="<?php echo $cpf ?? ''; ?>" name="cpf" id="cpf" maxlength="14" placeholder="XXX.XXX.XXX-XX" oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2')">
             </div>
             <div class="w-75 mt-3 gap-1 d-flex">
-                <a href="index.php" class="btn btn-secondary w-25">Sair</a>
+                <a href="login.php" class="btn btn-secondary w-25">Sair</a>
                 <input type="submit" name="submit" value="Validar" class="btn btn-success w-75">
             </div>
         </form>

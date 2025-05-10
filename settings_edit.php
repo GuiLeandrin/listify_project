@@ -16,7 +16,7 @@
         $cpf = @$usuario['cpf'];
         $telefone = @$usuario['telefone'];
     } else {
-        header("Location: index.php");
+        header("Location: login.php");
         exit;
     }
 

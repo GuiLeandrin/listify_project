@@ -51,4 +51,18 @@
         return ['bloco_texto' => $txtConfirmaExcluir, 'formulario_verifica' => $confirmaExcluir];
     }
     //FIM FUNÇÃO CRIAÇÃO DE VARIÁVEIS DE (FRASE), (TEXTO DO DELETE) E (VERIFICAÇÃO DO DELETE)
+
+    //INÍCIO FUNÇÃO QUE VERIFICA SE OS ITENS SÃO CHECKADOS
+    function checkItens($conexao, $idLista, $itens) {
+        $sqlCheckItens = "SELECT COUNT(*) FROM itens WHERE id_lista = '$idLista' AND status = 1";
+        $resultadoCheck = $conexao->query($sqlCheckItens);
+        $totalItens = $itens->num_rows;
+
+        if($resultadoCheck == $totalItens){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    //FIM FUNÇÃO QUE VERIFICA SE OS ITENS SÃO CHECKADOS
 ?>

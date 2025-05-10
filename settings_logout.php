@@ -13,13 +13,13 @@
         $cpf = @$usuario['cpf'];
         $telefone = @$usuario['telefone'];
     } else {
-        header("Location: index.php");
+        header("Location: login.php");
         exit;
     }
 
     if(isset($_POST['submit'])) {
         unset($_SESSION['id']);
-        header("Location: index.php");
+        header("Location: login.php");
         exit;
     }
 ?>

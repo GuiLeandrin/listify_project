@@ -43,7 +43,7 @@
         exit;
     } elseif(isset($_POST['enviarSair']) && $_POST['enviarSair'] === 'Sair') {
         unset($_SESSION['cpf']);
-        header("Location: index.php");
+        header("Location: login.php");
         exit;
     }
 ?>

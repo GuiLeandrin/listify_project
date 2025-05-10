@@ -18,7 +18,7 @@
         $cpf = @$usuario['cpf'];
         $telefone = @$usuario['telefone'];
     } else {
-        header("Location: index.php");
+        header("Location: login.php");
         exit;
     }
 
@@ -43,7 +43,7 @@
 
             if($exclusao) {
                 unset($_SESSION['id']);
-                header("Location: index.php");
+                header("Location: login.php");
                 exit;
             } else {
                 $erro = "
